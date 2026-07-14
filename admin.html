@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel — The Omar Omega</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045470289-brand--emblema-color.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f6f2ea;--ink:#141112;--red:#be1e2d;--yellow:#ffd41d}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Libre Baskerville",Georgia,serif;padding-bottom:8rem}
+  .anton{font-family:"Anton",sans-serif;font-weight:400}
+  header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,3rem);border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:10}
+  header .marca{display:flex;align-items:center;gap:.7rem}
+  header img{height:30px}
+  header h1{font-family:"Anton",sans-serif;font-size:1rem;letter-spacing:.18em;text-transform:uppercase}
+  header a{font-style:italic;font-size:.8rem;color:var(--ink);text-decoration:underline}
+  main{max-width:880px;margin:0 auto;padding:2rem clamp(1rem,4vw,2rem)}
+  .aviso-clave{border:2px solid var(--ink);background:var(--yellow);padding:1rem 1.2rem;margin-bottom:2rem;font-size:.9rem;line-height:1.6}
+  fieldset{border:2px solid var(--ink);padding:1.4rem;margin-bottom:2rem}
+  legend{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:.95rem;padding:0 .6rem;background:var(--paper)}
+  label{display:block;font-family:"Anton",sans-serif;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin:1.1rem 0 .35rem;color:#4a4344}
+  label:first-of-type{margin-top:0}
+  input[type=text],input[type=email],input[type=url],input[type=number],input[type=password],textarea,select{
+    width:100%;padding:.6rem .7rem;border:1.5px solid var(--ink);background:#fff;
+    font-family:"Libre Baskerville",Georgia,serif;font-size:.92rem;border-radius:0;
+  }
+  textarea{min-height:90px;resize:vertical;line-height:1.6}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}
+  .fila{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .fila3{display:grid;grid-template-columns:1fr 1fr 2fr;gap:.8rem}
+  .check{display:flex;align-items:center;gap:.6rem;margin-top:1rem;font-size:.9rem}
+  .check input{width:1.15rem;height:1.15rem;accent-color:var(--red)}
+  .nota{font-style:italic;font-size:.78rem;opacity:.7;margin-top:.35rem;line-height:1.5}
+  /* galería */
+  .foto-item{display:grid;grid-template-columns:86px 1fr 90px auto;gap:.8rem;align-items:center;border:1.5px solid var(--ink);padding:.7rem;margin-bottom:.7rem;background:#fff}
+  .foto-item img{width:86px;height:64px;object-fit:cover;border:1px solid var(--ink)}
+  .foto-item .acciones{display:flex;gap:.35rem}
+  button{font-family:"Anton",sans-serif;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--ink);background:var(--paper);padding:.5rem .9rem;cursor:pointer;font-size:.72rem}
+  button:hover{background:var(--ink);color:var(--paper)}
+  button.mini{padding:.3rem .55rem;border-width:1.5px}
+  button.rojo{background:var(--red);border-color:var(--red);color:#fff;font-size:.95rem;padding:.9rem 1.6rem}
+  button.rojo:hover{background:var(--ink);border-color:var(--ink)}
+  .barra-guardar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);padding:1rem clamp(1rem,4vw,3rem);display:flex;align-items:center;gap:1rem;z-index:20}
+  .barra-guardar .estado{color:var(--paper);font-style:italic;font-size:.85rem;flex:1}
+  .subiendo{opacity:.5;pointer-events:none}
+  @media(max-width:640px){.fila,.fila3{grid-template-columns:1fr}.foto-item{grid-template-columns:66px 1fr;grid-auto-rows:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="marca">
+    <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045474584-brand--glifo-negro.svg" alt="">
+    <h1>Panel de contenido</h1>
+  </div>
+  <a href="index.html" target="_blank" rel="noopener">ver la página →</a>
+</header>
+
+<main>
+  <div class="aviso-clave">
+    <b>Omar:</b> aquí cambias los textos, links y fotos de tu press kit.
+    Edita lo que quieras y aprieta <b>GUARDAR CAMBIOS</b> (necesitas tu frase secreta).
+    Los cambios se ven en la página al instante — recárgala para comprobar.
+  </div>
+
+  <fieldset>
+    <legend>Tu frase secreta</legend>
+    <label for="clave">Frase secreta (te la pasó Fer)</label>
+    <input type="password" id="clave" autocomplete="current-password" placeholder="••••••••">
+  </fieldset>
+
+  <div id="formulario"><!-- se genera con JS --></div>
+</main>
+
+<div class="barra-guardar">
+  <span class="estado" id="estado">Cargando contenido…</span>
+  <button class="rojo" id="btnGuardar" type="button">Guardar cambios</button>
+</div>
+
+<script>
+const SUPA_URL = 'https://ajekywhnuepmqbxflala.supabase.co';
+const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqZWt5d2hudWVwbXFieGZsYWxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzODgxOTIsImV4cCI6MjA5ODk2NDE5Mn0.A29frr_c1g0NLMtv3-S1IRWZvy5xXXMZW0pBkkZxcpk';
+const FN = SUPA_URL + '/functions/v1/omar-epk-guardar';
+
+let D = null; // el contenido que se está editando
+
+const get = (o, p) => p.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
+const set = (o, p, v) => { const ks = p.split('.'); const u = ks.pop(); ks.reduce((a, k) => a[k], o)[u] = v; };
+const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+/* ---------- construcción del formulario ---------- */
+function campo(etq, path, tipo = 'text', nota = '') {
+  const v = get(D, path);
+  if (tipo === 'textarea')
+    return `<label>${etq}</label><textarea data-path="${path}">${esc(v)}</textarea>${nota ? `<p class="nota">${nota}</p>` : ''}`;
+  if (tipo === 'check')
+    return `<div class="check"><input type="checkbox" data-path="${path}" data-tipo="bool" ${v ? 'checked' : ''} id="c-${path}"><label for="c-${path}" style="margin:0">${etq}</label></div>`;
+  if (tipo === 'number')
+    return `<label>${etq}</label><input type="number" step="0.1" data-path="${path}" data-tipo="num" value="${esc(v)}">${nota ? `<p class="nota">${nota}</p>` : ''}`;
+  return `<label>${etq}</label><input type="text" data-path="${path}" value="${esc(v)}">${nota ? `<p class="nota">${nota}</p>` : ''}`;
+}
+
+function filaFoto(f, i) {
+  return `<div class="foto-item" data-i="${i}">
+    <img src="${esc(f.archivo)}" alt="">
+    <div>
+      <label style="margin-top:0">Serie / pie</label>
+      <input type="text" data-path="galeria.${i}.serie" value="${esc(f.serie)}">
+    </div>
+    <div>
+      <label style="margin-top:0">Ancho</label>
+      <select data-path="galeria.${i}.tam" data-tipo="num">
+        ${[4,5,6,7,8].map(n => `<option value="${n}" ${f.tam == n ? 'selected' : ''}>${n}${n <= 5 ? ' (vertical)' : ' (ancha)'}</option>`).join('')}
+      </select>
+    </div>
+    <div class="acciones">
+      <button class="mini" type="button" data-mover="-1" title="Subir">↑</button>
+      <button class="mini" type="button" data-mover="1" title="Bajar">↓</button>
+      <button class="mini" type="button" data-borrar title="Quitar">✕</button>
+    </div>
+  </div>`;
+}
+
+function pintar() {
+  document.getElementById('formulario').innerHTML = `
+  <fieldset>
+    <legend>Portada</legend>
+    ${campo('Frase corta arriba del nombre', 'kicker', 'textarea')}
+    <label>Foto principal</label>
+    <div class="foto-item" style="grid-template-columns:86px 1fr">
+      <img id="heroPrev" src="${esc(D.heroFoto)}" alt="">
+      <div><button type="button" id="btnHero">Cambiar foto principal</button>
+      <p class="nota">Se sube y reemplaza al guardar. Ideal: foto vertical.</p></div>
+    </div>
+    ${campo('Pie de la foto principal', 'heroPie')}
+    ${campo('La página oscurece al bajar (día → noche)', 'diaNoche', 'check')}
+    ${campo('Luna 3D al abrir la página', 'intro.activar', 'check')}
+    ${campo('Segundos de la luna', 'intro.duracionSegundos', 'number')}
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 01 — El universo</legend>
+    ${campo('Texto grande', 'manifiesto', 'textarea', 'Puedes usar &lt;em&gt;palabras&lt;/em&gt; para ponerlas en rojo.')}
+    ${campo('Nota chica', 'manifiestoNota', 'textarea')}
+    ${D.capitulos.map((c, i) => `
+      <div class="fila3">
+        <div>${campo('Acto ' + (i + 1), `capitulos.${i}.acto`)}</div>
+        <div>${campo('Etiqueta', `capitulos.${i}.etiqueta`)}</div>
+        <div>${campo('Texto', `capitulos.${i}.texto`)}</div>
+      </div>`).join('')}
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 02 — Música</legend>
+    ${D.plataformas.map((p, i) => campo('Link de ' + p.nombre, `plataformas.${i}.url`, 'text', i < 3 ? 'Déjalo vacío para mostrar "pronto".' : '')).join('')}
+    ${campo('ID de canción de Spotify (player)', 'spotifyTrackId', 'text', 'Lo que va después de /track/ en el link de la canción.')}
+    ${campo('Texto bajo el player', 'cancionDestacada')}
+    ${campo('Nota de la sección', 'musicaNota', 'textarea')}
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 03 — El video</legend>
+    <div class="fila">
+      <div>${campo('ID del video de YouTube', 'videoYouTubeId', 'text', 'Lo que va después de youtu.be/')}</div>
+      <div>${campo('Subtítulo amarillo', 'videoSub')}</div>
+    </div>
+    <div class="fila">
+      <div>${campo('Título', 'videoTitulo')}</div>
+      <div>${campo('Título en rojo', 'videoTituloRojo')}</div>
+    </div>
+    ${campo('Pie del video', 'videoPie')}
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 04 — Fotos</legend>
+    <div id="listaFotos">${D.galeria.map(filaFoto).join('')}</div>
+    <button type="button" id="btnAgregarFoto">+ Agregar foto</button>
+    <p class="nota">Ancho 4–5 para fotos verticales, 6–8 para horizontales. Con ↑ ↓ cambias el orden.</p>
+    ${campo('Frase del recuadro amarillo', 'fraseGaleria', 'text', 'Déjala vacía para quitar el recuadro. &lt;br&gt; hace salto de línea.')}
+    <div class="fila">
+      <div>${campo('Firma de la frase', 'fraseGaleriaFirma')}</div>
+      <div>${campo('Después de qué foto va', 'frasePosicion', 'number')}</div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 05 — Contacto</legend>
+    <div class="fila">
+      <div>${campo('Correo', 'correo')}</div>
+      <div>${campo('Pie de página', 'piePagina')}</div>
+    </div>
+    <div class="fila">
+      <div>${campo('Instagram (sin @)', 'instagram')}</div>
+      <div>${campo('TikTok (sin @)', 'tiktok')}</div>
+    </div>
+    ${campo('Texto de introducción', 'contactoIntro', 'textarea')}
+    ${campo('Aviso chiquito', 'contactoAviso')}
+  </fieldset>`;
+
+  document.getElementById('btnHero').onclick = () => subirFoto(url => {
+    D.heroFoto = url;
+    document.getElementById('heroPrev').src = url;
+  });
+  document.getElementById('btnAgregarFoto').onclick = () => subirFoto(url => {
+    D.galeria.push({ archivo: url, serie: 'Nueva', tam: 6 });
+    pintar();
+  });
+  document.querySelectorAll('.foto-item [data-mover]').forEach(b => b.onclick = () => {
+    const i = +b.closest('.foto-item').dataset.i, j = i + (+b.dataset.mover);
+    if (j < 0 || j >= D.galeria.length) return;
+    [D.galeria[i], D.galeria[j]] = [D.galeria[j], D.galeria[i]];
+    pintar();
+  });
+  document.querySelectorAll('.foto-item [data-borrar]').forEach(b => b.onclick = () => {
+    const i = +b.closest('.foto-item').dataset.i;
+    if (confirm('¿Quitar esta foto de la página? (el archivo no se borra)')) {
+      D.galeria.splice(i, 1);
+      pintar();
+    }
+  });
+}
+
+/* cualquier cambio en inputs → actualiza D */
+document.addEventListener('input', e => {
+  const p = e.target.dataset.path;
+  if (!p || !D) return;
+  let v = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+  if (e.target.dataset.tipo === 'num') v = parseFloat(v) || 0;
+  set(D, p, v);
+});
+
+/* ---------- subir foto (se reduce y convierte a webp en el navegador) ---------- */
+function subirFoto(alTerminar) {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.onchange = async () => {
+    const f = inp.files[0];
+    if (!f) return;
+    const clave = document.getElementById('clave').value;
+    if (!clave) return alert('Primero escribe tu frase secreta (arriba).');
+    estado('Subiendo foto…');
+    document.body.classList.add('subiendo');
+    try {
+      const img = await createImageBitmap(f);
+      const MAX = 1600;
+      const esc = Math.min(1, MAX / Math.max(img.width, img.height));
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(img.width * esc);
+      cv.height = Math.round(img.height * esc);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      const blob = await new Promise(res => cv.toBlob(res, 'image/webp', 0.8));
+      const b64 = await new Promise(res => {
+        const fr = new FileReader();
+        fr.onload = () => res(fr.result.split(',')[1]);
+        fr.readAsDataURL(blob);
+      });
+      const r = await fetch(FN, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON },
+        body: JSON.stringify({ clave, nombre: f.name.replace(/\.[^.]+$/, '') + '.webp', tipo: 'image/webp', foto: b64 })
+      });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || r.status);
+      sessionStorage.setItem('omarClave', clave);
+      alTerminar(j.url);
+      estado('Foto subida ✓ — no olvides GUARDAR CAMBIOS.');
+    } catch (err) {
+      alert('No se pudo subir: ' + err.message);
+      estado('Error al subir la foto.');
+    }
+    document.body.classList.remove('subiendo');
+  };
+  inp.click();
+}
+
+/* ---------- guardar ---------- */
+document.getElementById('btnGuardar').onclick = async () => {
+  const clave = document.getElementById('clave').value;
+  if (!clave) return alert('Escribe tu frase secreta (arriba).');
+  estado('Guardando…');
+  document.body.classList.add('subiendo');
+  try {
+    const r = await fetch(FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON },
+      body: JSON.stringify({ clave, data: D })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || r.status);
+    sessionStorage.setItem('omarClave', clave);
+    estado('✓ Guardado. Recarga la página del press kit para verlo.');
+  } catch (err) {
+    estado('✗ ' + (err.message === 'clave incorrecta' ? 'Frase secreta incorrecta.' : 'Error: ' + err.message));
+  }
+  document.body.classList.remove('subiendo');
+};
+
+function estado(t) { document.getElementById('estado').textContent = t; }
+
+/* ---------- carga inicial ---------- */
+(async () => {
+  try {
+    const r = await fetch(`${SUPA_URL}/rest/v1/omar_epk?id=eq.1&select=data`, {
+      headers: { apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON }
+    });
+    const filas = await r.json();
+    D = filas[0].data;
+    document.getElementById('clave').value = sessionStorage.getItem('omarClave') || '';
+    pintar();
+    estado('Contenido cargado. Edita y guarda cuando quieras.');
+  } catch (e) {
+    estado('No se pudo cargar el contenido: ' + e.message);
+  }
+})();
+</script>
+</body>
+</html>

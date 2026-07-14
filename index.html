@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Omar Omega — Press Kit</title>
+<meta name="description" content="Press kit oficial de The Omar Omega — cantante, productor y DJ. α Alpha: Act 0 — Cabaret, Visiō. Booking, prensa y colaboraciones.">
+<meta property="og:title" content="The Omar Omega — Press Kit">
+<meta property="og:description" content="Un universo contado por actos. Cabaret, bolero y pista de baile. Booking, prensa y colaboraciones.">
+<meta property="og:image" content="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045464859-img--hero.webp">
+<link rel="icon" type="image/svg+xml" href="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045470289-brand--emblema-color.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea;
+    --ink:#141112;
+    --red:#be1e2d;
+    --yellow:#ffd41d;
+    --blue:#21409a;
+    --line:rgba(20,17,18,.85);
+    --pad:clamp(1.1rem,4vw,3.5rem);
+    /* cielo día→noche (los actualiza el JS con el scroll) */
+    --fondo:#f6f2ea;
+    --tinta:#141112;
+    --inv:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html.con-intro{overflow:hidden}
+  body{
+    background:var(--fondo);
+    color:var(--tinta);
+    font-family:"Libre Baskerville",Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .anton{font-family:"Anton",sans-serif;font-weight:400;font-style:normal}
+
+  /* ---------- cielo estrellado (aparece al anochecer) ---------- */
+  #cielo-estrellas{
+    position:fixed;inset:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;opacity:0;
+  }
+  main,footer,header{position:relative;z-index:1}
+  header{position:fixed}
+
+  /* ---------- parallax (elementos con data-par) ---------- */
+  [data-par]{transform:translateY(var(--dy,0px));will-change:transform}
+
+  /* ---------- entrada del hero ---------- */
+  @keyframes entrar{to{opacity:1;transform:none}}
+  .hero-title .kicker,.hero-title h1 .the,.hero-title h1 .linea,.hero-meta{
+    opacity:0;transform:translateY(34px);
+    animation:entrar .85s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero-title .kicker{animation-delay:.15s}
+  .hero-title h1 .the{animation-delay:.3s}
+  .hero-title h1 .linea:nth-of-type(2){animation-delay:.42s}
+  .hero-title h1 .linea:nth-of-type(3){animation-delay:.56s}
+  .hero-meta{animation-delay:.85s}
+  .hero-fig .frame{
+    clip-path:inset(0 0 100% 0);
+    animation:cortina 1s cubic-bezier(.6,0,.2,1) .5s forwards;
+  }
+  @keyframes cortina{to{clip-path:inset(0 0 0% 0)}}
+  .hero-fig .firma,.hero-fig figcaption{
+    opacity:0;animation:entrar .8s ease 1.35s forwards;transform:none;
+  }
+
+  /* ---------- intro: luna 3D ---------- */
+  #intro{
+    position:fixed;inset:0;z-index:100;
+    background:var(--ink);
+    display:grid;place-items:center;
+    transition:opacity .7s ease;
+    cursor:pointer;
+  }
+  #intro.oculto{opacity:0;pointer-events:none}
+  .intro-centro{display:grid;justify-items:center;gap:1.6rem}
+  #luna3d{display:block}
+  .intro-marca{
+    font-family:"Anton",sans-serif;color:var(--paper);
+    font-size:clamp(.8rem,2vw,1rem);letter-spacing:.5em;text-transform:uppercase;
+    text-indent:.5em; /* compensa el letter-spacing final para centrar */
+  }
+  .intro-marca b{color:var(--red);font-weight:400}
+  .intro-pista{
+    position:absolute;bottom:1.6rem;left:0;right:0;text-align:center;
+    font-style:italic;font-size:.72rem;color:rgba(246,242,234,.45);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.65rem var(--pad);
+    background:color-mix(in srgb, var(--fondo) 92%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1.5px solid var(--tinta);
+  }
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .brand img.glifo{height:26px;width:auto}
+  .brand img.wm{height:13px;width:auto;translate:0 1px}
+  .brand img{filter:invert(var(--inv))}
+  nav{display:flex;gap:clamp(.9rem,2.5vw,2rem)}
+  nav a{
+    font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.22em;
+    text-transform:uppercase;padding:.2rem 0;position:relative;
+  }
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
+    background:var(--red);transition:width .25s;
+  }
+  nav a:hover::after{width:100%}
+
+  main{padding-top:0}
+  section{position:relative}
+  .wrap{padding-left:var(--pad);padding-right:var(--pad);max-width:1420px;margin:0 auto}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:5.5rem}
+  .hero .wrap{width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1rem,3vw,3rem);align-items:center}
+  .hero-title{position:relative;z-index:2;padding-bottom:clamp(1.2rem,4vh,3rem)}
+  .hero-title .kicker{
+    font-style:italic;font-size:clamp(.85rem,1.4vw,1.05rem);
+    margin-bottom:1.4rem;max-width:34ch;
+  }
+  .hero-title h1{
+    font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(3.4rem,11.5vw,10.5rem);
+    line-height:.92;letter-spacing:.005em;
+  }
+  .hero-title h1 .linea{display:block}
+  .hero-title h1 .the{
+    display:block;font-size:.32em;letter-spacing:.35em;
+    -webkit-text-stroke:1.5px var(--tinta);color:transparent;
+  }
+  .hero-title h1 .omega{color:var(--red)}
+  .hero-meta{
+    margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;
+    font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+  }
+  .hero-meta span::before{content:"— ";color:var(--red)}
+  .hero-fig{position:relative;z-index:1}
+  .hero-fig .frame{
+    border:2px solid var(--tinta);
+    box-shadow:14px 14px 0 var(--red);
+    overflow:hidden;
+  }
+  .hero-fig img.foto{width:100%;height:auto}
+  .hero-fig figcaption{
+    font-style:italic;font-size:.78rem;margin-top:1rem;opacity:.85;
+  }
+  .hero-fig .firma{
+    position:absolute;width:56%;left:-14%;bottom:6%;z-index:3;
+    filter:drop-shadow(0 1px 0 rgba(246,242,234,.4));
+    pointer-events:none;
+  }
+  .saturno-wrap{
+    position:absolute;top:16%;right:44%;width:clamp(64px,7vw,110px);z-index:0;
+  }
+  .saturno-orbita{
+    width:100%;
+    animation:flotar 9s ease-in-out infinite;
+    opacity:0;animation-name:flotar,entrar;animation-duration:9s,.9s;
+    animation-timing-function:ease-in-out,ease;animation-iteration-count:infinite,1;
+    animation-delay:0s,1.1s;animation-fill-mode:none,forwards;
+  }
+  @keyframes flotar{
+    0%,100%{transform:translateY(0) rotate(-8deg)}
+    50%{transform:translateY(-26px) rotate(6deg)}
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    background:var(--ink);color:var(--paper);
+    border-block:2px solid var(--ink);
+    overflow:hidden;white-space:nowrap;padding:.8rem 0;
+  }
+  .marquee .track{display:inline-flex;align-items:center;gap:2.2rem;animation:desfile 26s linear infinite;width:max-content}
+  .marquee span{
+    font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(.95rem,1.6vw,1.25rem);letter-spacing:.18em;
+  }
+  .marquee em{font-family:"Libre Baskerville",serif;font-style:italic;letter-spacing:0;color:var(--yellow)}
+  .marquee img{height:1.15em;width:auto}
+  @keyframes desfile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- section scaffolding ---------- */
+  .seccion{padding-block:clamp(5.5rem,12vh,9.5rem)}
+  .etiqueta{
+    display:flex;align-items:baseline;gap:1rem;
+    position:relative;padding-top:.8rem;margin-bottom:clamp(2.2rem,6vh,4rem);
+  }
+  .etiqueta::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--tinta);transform:scaleX(0);transform-origin:left;
+    transition:transform 1s cubic-bezier(.25,.8,.25,1) .15s;
+  }
+  .etiqueta.in::before{transform:scaleX(1)}
+  .etiqueta .num{
+    font-family:"Anton",sans-serif;font-size:.8rem;letter-spacing:.2em;color:var(--red);
+  }
+  .etiqueta h2{
+    font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(1.6rem,3.4vw,2.6rem);letter-spacing:.04em;
+  }
+  .etiqueta .aparte{margin-left:auto;font-style:italic;font-size:.82rem;opacity:.75;text-align:right}
+
+  /* ---------- manifiesto ---------- */
+  .manifiesto .cuerpo{
+    display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr);
+    gap:clamp(2rem,5vw,5rem);align-items:start;
+  }
+  .manifiesto p.grande{
+    font-size:clamp(1.25rem,2.5vw,2.05rem);line-height:1.55;
+  }
+  .manifiesto p.grande em{color:var(--red)}
+  .manifiesto .nota{margin-top:2rem;font-size:.95rem;line-height:1.8;max-width:52ch;opacity:.9}
+  .manifiesto aside{position:relative;display:grid;justify-items:center;gap:1.4rem}
+  .manifiesto aside img.luna{width:min(78%,300px);will-change:transform}
+  .manifiesto .simbolos{display:flex;align-items:center;gap:1.4rem;opacity:.9}
+  .manifiesto .simbolos img{height:30px;width:auto}
+  .manifiesto .simbolos .aries{height:38px}
+  .capitulos{
+    margin-top:clamp(2.6rem,7vh,4.5rem);display:grid;
+    grid-template-columns:repeat(3,1fr);border:2px solid var(--tinta);
+  }
+  .capitulos article{
+    padding:1.3rem 1.4rem 1.5rem;
+    opacity:0;transform:translateY(18px);
+    transition:opacity .6s ease,transform .6s ease;
+  }
+  .capitulos.in article{opacity:1;transform:none}
+  .capitulos.in article:nth-child(2){transition-delay:.15s}
+  .capitulos.in article:nth-child(3){transition-delay:.3s}
+  .capitulos article + article{border-left:2px solid var(--tinta)}
+  .capitulos .acto{font-family:"Anton",sans-serif;font-size:2rem;line-height:1}
+  .capitulos .acto small{font-size:.5em;letter-spacing:.2em;color:var(--red)}
+  .capitulos p{font-size:.82rem;font-style:italic;margin-top:.55rem;line-height:1.6}
+
+  /* ---------- música ---------- */
+  .plataformas{border-bottom:2px solid var(--tinta)}
+  .plataformas a{
+    display:flex;align-items:center;gap:1.2rem;
+    border-top:2px solid var(--tinta);
+    padding:1.15rem .4rem;
+    font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(1.7rem,4.6vw,3.4rem);line-height:1;
+    transition:background .18s,color .18s,padding-left .18s;
+  }
+  .plataformas a{opacity:0;transform:translateX(-16px);transition:opacity .5s ease,transform .5s ease,background .18s,color .18s,padding-left .18s}
+  .plataformas.in a{opacity:1;transform:none}
+  .plataformas.in a:nth-child(2){transition-delay:.1s,.1s,0s,0s,0s}
+  .plataformas.in a:nth-child(3){transition-delay:.2s,.2s,0s,0s,0s}
+  .plataformas.in a:nth-child(4){transition-delay:.3s,.3s,0s,0s,0s}
+  .plataformas a .idx{font-size:.85rem;letter-spacing:.2em;color:var(--red);min-width:3.2ch}
+  .plataformas a .flecha{margin-left:auto;font-family:"Libre Baskerville",serif;font-style:italic;font-size:.5em;letter-spacing:0;opacity:.7}
+  .plataformas a:hover{background:var(--tinta);color:var(--fondo);padding-left:1.2rem}
+  .plataformas a:hover .idx{color:var(--yellow)}
+  .plataformas a.pendiente{opacity:.45;cursor:default}
+  .plataformas a.pendiente:hover{background:none;color:inherit;padding-left:.4rem}
+  .plataformas a.pendiente:hover .idx{color:var(--red)}
+  .musica .nota{margin-top:1.6rem;font-style:italic;font-size:.85rem;opacity:.75}
+  .player{margin-bottom:clamp(2.2rem,5vh,3.4rem)}
+  .player .player-marco{
+    border-radius:14px;
+    box-shadow:12px 12px 0 var(--yellow), 12px 12px 0 2px var(--ink);
+    line-height:0;
+  }
+  .player iframe{width:100%;height:152px;border:0;border-radius:14px;display:block}
+  .player figcaption{font-style:italic;font-size:.82rem;margin-top:1.3rem;opacity:.8}
+
+  /* ---------- video ---------- */
+  .video{background:var(--ink);color:var(--paper)}
+  .video .etiqueta::before{background:var(--paper)}
+  .video .etiqueta .num{color:var(--yellow)}
+  .video-titulo{margin-bottom:2.6rem}
+  .video-titulo .alpha{
+    font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(2.6rem,8vw,7rem);line-height:.95;
+  }
+  .video-titulo .alpha b{color:var(--red);font-weight:400}
+  .video-titulo .sub{font-style:italic;font-size:clamp(1rem,2vw,1.4rem);margin-top:.9rem;color:var(--yellow)}
+  .pantalla{
+    position:relative;aspect-ratio:16/9;border:2px solid var(--paper);
+    box-shadow:16px 16px 0 var(--red);background:#000;
+  }
+  .pantalla iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video figcaption{margin-top:1.4rem;font-style:italic;font-size:.85rem;opacity:.8}
+
+  /* ---------- galería ---------- */
+  .galeria .grid{
+    display:grid;grid-template-columns:repeat(12,1fr);
+    gap:clamp(.8rem,2vw,1.6rem);
+    align-items:start;
+  }
+  .galeria figure{position:relative;cursor:zoom-in}
+  .galeria figure img{
+    width:100%;height:auto;border:2px solid var(--tinta);
+    transition:transform .25s ease;
+  }
+  .galeria figure:hover img{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--red)}
+  .galeria figcaption{
+    display:flex;justify-content:space-between;gap:1rem;
+    font-family:"Anton",sans-serif;font-size:.62rem;letter-spacing:.22em;
+    text-transform:uppercase;margin-top:.5rem;opacity:.85;
+  }
+  .galeria figcaption i{font-family:"Libre Baskerville",serif;font-style:italic;letter-spacing:0;text-transform:none}
+  .tile{
+    background:var(--yellow);border:2px solid var(--ink);color:var(--ink);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:1.2rem;min-height:220px;gap:2rem;
+  }
+  .tile p{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(1.2rem,2vw,1.7rem);line-height:1.1}
+  .tile span{font-style:italic;font-size:.8rem}
+  .g-4{grid-column:span 4}.g-5{grid-column:span 5}.g-6{grid-column:span 6}
+  .g-7{grid-column:span 7}.g-8{grid-column:span 8}
+
+  /* ---------- contacto ---------- */
+  .contacto .intro-txt{font-style:italic;font-size:clamp(1rem,2vw,1.3rem);max-width:46ch;margin-bottom:3rem}
+  .correo{
+    display:block;font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(1.35rem,4.6vw,4.3rem);line-height:1.05;
+    word-break:break-word;border-block:2px solid var(--tinta);
+    padding:1.6rem .2rem;transition:color .2s;
+  }
+  .correo:hover{color:var(--red)}
+  .redes{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--tinta)}
+  .redes a{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+    padding:1.1rem .2rem;font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(1rem,2.4vw,1.7rem);
+  }
+  .redes a:first-child{border-right:2px solid var(--tinta)}
+  .redes a small{font-family:"Libre Baskerville",serif;font-style:italic;font-size:.72rem;text-transform:none;opacity:.7}
+  .redes a:hover{background:var(--tinta);color:var(--fondo)}
+  .contacto .aviso{margin-top:1.6rem;font-style:italic;font-size:.8rem;opacity:.6}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:var(--paper);padding:2.6rem var(--pad)}
+  .pie{
+    max-width:1420px;margin:0 auto;display:flex;flex-wrap:wrap;
+    align-items:center;justify-content:space-between;gap:1.4rem;
+  }
+  .pie img{height:44px;width:auto}
+  .pie p{font-size:.72rem;font-style:italic;opacity:.75}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- lightbox ---------- */
+  dialog.lb{
+    border:none;padding:0;background:rgba(15,12,13,.94);
+    max-width:100vw;max-height:100vh;width:100vw;height:100vh;
+    display:grid;place-items:center;
+  }
+  dialog.lb:not([open]){display:none}
+  dialog.lb img{max-width:92vw;max-height:88vh;width:auto;height:auto;border:2px solid var(--paper)}
+  dialog.lb::backdrop{background:transparent}
+  dialog.lb .cerrar{
+    position:fixed;top:1rem;right:1.4rem;font-family:"Anton",sans-serif;
+    color:var(--paper);background:none;border:2px solid var(--paper);
+    font-size:.8rem;letter-spacing:.2em;padding:.5rem .9rem;cursor:pointer;
+  }
+  dialog.lb .cerrar:hover{background:var(--red);border-color:var(--red)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .hero{min-height:auto;padding-top:6rem}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero-fig{order:-1;max-width:78%;justify-self:end}
+    .hero-fig .firma{width:70%;left:-24%}
+    .saturno-orbita{right:auto;left:4%;top:12%}
+    .manifiesto .cuerpo{grid-template-columns:1fr}
+    .manifiesto aside{grid-auto-flow:column;justify-content:start;align-items:center}
+    .manifiesto aside img.luna{width:150px}
+    .capitulos{grid-template-columns:1fr}
+    .capitulos article + article{border-left:none;border-top:2px solid var(--tinta)}
+    .g-4,.g-5,.g-6,.g-7,.g-8{grid-column:span 6}
+    .redes{grid-template-columns:1fr}
+    .redes a:first-child{border-right:none;border-bottom:2px solid var(--tinta)}
+    .brand img.wm{display:none}
+    nav{gap:.9rem}
+    nav a{font-size:.62rem;letter-spacing:.14em}
+  }
+  @media (max-width:560px){
+    .g-4,.g-5,.g-6,.g-7,.g-8{grid-column:span 12}
+    .hero-fig{max-width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .saturno-orbita,.marquee .track{animation:none;opacity:1}
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    .hero-title .kicker,.hero-title h1 .the,.hero-title h1 .linea,.hero-meta,
+    .hero-fig .firma,.hero-fig figcaption{animation:none;opacity:1;transform:none}
+    .hero-fig .frame{animation:none;clip-path:none}
+    .etiqueta::before{transition:none;transform:scaleX(1)}
+    .capitulos article,.plataformas a{transition:none;opacity:1;transform:none}
+    [data-par]{transform:none !important}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="cielo-estrellas" aria-hidden="true"></canvas>
+
+<!-- ============ INTRO: LUNA 3D ============ -->
+<div id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-centro">
+    <canvas id="luna3d"></canvas>
+    <p class="intro-marca">The Omar <b>Omega</b></p>
+  </div>
+  <p class="intro-pista">clic para entrar</p>
+</div>
+
+<header>
+  <a class="brand" href="#inicio" aria-label="The Omar Omega — inicio">
+    <img class="glifo" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045474584-brand--glifo-negro.svg" alt="">
+    <img class="wm" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045481464-brand--wordmark-negro.svg" alt="omar.omega">
+  </a>
+  <nav>
+    <a href="#musica">Música</a>
+    <a href="#video">Video</a>
+    <a href="#fotos">Fotos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main id="inicio">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="saturno-wrap" data-par="0.16" aria-hidden="true">
+      <img class="saturno-orbita" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045479980-brand--saturno-rojo.svg" alt="">
+    </div>
+    <div class="wrap">
+      <div class="hero-title">
+        <p class="kicker" data-c="kicker"></p>
+        <h1>
+          <span class="the">The</span>
+          <span class="linea">Omar</span>
+          <span class="linea omega">Omega</span>
+        </h1>
+        <div class="hero-meta" id="heroMeta"></div>
+      </div>
+      <figure class="hero-fig" data-par="0.06">
+        <div class="frame">
+          <img class="foto" id="heroFoto" src="" width="1067" height="1600" alt="The Omar Omega bajo un spotlight rojo, sesión cabaret" fetchpriority="high">
+        </div>
+        <img class="firma" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045473172-brand--firma-rojo.svg" alt="Firma de Omar Jiménez">
+        <figcaption data-c="heroPie"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ============ MANIFIESTO ============ -->
+  <section class="seccion manifiesto" id="manifiesto">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 01</span>
+        <h2>El universo</h2>
+        <p class="aparte">quién es The Omar Omega</p>
+      </div>
+      <div class="cuerpo">
+        <div>
+          <p class="grande reveal" data-html="manifiesto"></p>
+          <p class="nota reveal" data-c="manifiestoNota"></p>
+        </div>
+        <aside class="reveal">
+          <img class="luna" data-spin src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045475499-brand--luna-a-negro.svg" alt="Ilustración de luna dibujada a mano">
+          <div class="simbolos">
+            <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045478256-brand--saturno-glifo-negro.svg" alt="">
+            <img class="aries" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045469074-brand--aries-negro.svg" alt="Símbolo de Aries">
+            <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045470907-brand--emblema-negro.svg" alt="Emblema All Kings">
+          </div>
+        </aside>
+      </div>
+      <div class="capitulos reveal" id="capitulos"></div>
+    </div>
+  </section>
+
+  <!-- ============ MÚSICA ============ -->
+  <section class="seccion musica" id="musica" style="padding-top:0">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 02</span>
+        <h2>Música</h2>
+        <p class="aparte">escúchalo donde sea</p>
+      </div>
+      <figure class="player reveal" id="playerSpotify" hidden>
+        <div class="player-marco"></div>
+        <figcaption id="playerPie"></figcaption>
+      </figure>
+      <div class="plataformas reveal" id="plataformas"></div>
+      <p class="nota reveal" data-html="musicaNota"></p>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO ============ -->
+  <section class="seccion video" id="video">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 03</span>
+        <h2 style="color:var(--paper)">El video</h2>
+        <p class="aparte" style="color:var(--paper)">estreno 2026</p>
+      </div>
+      <div class="video-titulo reveal">
+        <p class="alpha"><span data-c="videoTitulo"></span> <b data-c="videoTituloRojo"></b></p>
+        <p class="sub" data-c="videoSub"></p>
+      </div>
+      <figure class="reveal">
+        <div class="pantalla" id="pantallaVideo"></div>
+        <figcaption data-c="videoPie"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ GALERÍA ============ -->
+  <section class="seccion galeria" id="fotos">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 04</span>
+        <h2>Fotos</h2>
+        <p class="aparte" data-c="galeriaAviso"></p>
+      </div>
+      <div class="grid" id="galeriaGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="seccion contacto" id="contacto" style="padding-top:0">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 05</span>
+        <h2>Contacto</h2>
+        <p class="aparte">booking, prensa y colaboraciones</p>
+      </div>
+      <p class="intro-txt reveal" data-c="contactoIntro"></p>
+      <a class="correo reveal" id="correoLink" href=""></a>
+      <div class="redes reveal">
+        <a id="igLink" href="" target="_blank" rel="noopener">Instagram <small id="igUser"></small></a>
+        <a id="ttLink" href="" target="_blank" rel="noopener">TikTok <small id="ttUser"></small></a>
+      </div>
+      <p class="aviso reveal" data-c="contactoAviso"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="pie">
+    <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045471875-brand--firma-blanco.svg" alt="Omar Jiménez">
+    <p data-c="piePagina"></p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lightbox">
+  <button class="cerrar" type="button">Cerrar ✕</button>
+  <img src="" alt="">
+</dialog>
+
+<script src="contenido.js"></script>
+<script>
+/* ============================================================
+   MOTOR DE LA PÁGINA — no hace falta editar nada de aquí
+   para abajo: el contenido vive en contenido.js
+   ============================================================ */
+/* ---- contenido en línea (Supabase): la página lee lo último que
+   guardó Omar desde el panel /admin.html; si no responde en 2.5s,
+   usa el contenido local de contenido.js ---- */
+const SUPA_URL = 'https://ajekywhnuepmqbxflala.supabase.co';
+const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqZWt5d2hudWVwbXFieGZsYWxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzODgxOTIsImV4cCI6MjA5ODk2NDE5Mn0.A29frr_c1g0NLMtv3-S1IRWZvy5xXXMZW0pBkkZxcpk';
+
+(async function(){
+  let C = window.CONTENIDO;
+  try {
+    const ctl = new AbortController();
+    setTimeout(() => ctl.abort(), 2500);
+    const r = await fetch(`${SUPA_URL}/rest/v1/omar_epk?id=eq.1&select=data`, {
+      headers: { apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON },
+      signal: ctl.signal
+    });
+    if (r.ok) {
+      const filas = await r.json();
+      if (filas[0] && filas[0].data) C = Object.assign({}, window.CONTENIDO, filas[0].data);
+    }
+  } catch (e) { /* sin conexión: contenido local */ }
+  window.__origenContenido = C === window.CONTENIDO ? 'local' : 'supabase';
+  iniciar(C);
+})();
+
+function iniciar(C){
+
+  /* ----- textos simples (data-c) y con formato (data-html) ----- */
+  document.querySelectorAll('[data-c]').forEach(el => { el.textContent = C[el.dataset.c] ?? ''; });
+  document.querySelectorAll('[data-html]').forEach(el => { el.innerHTML = C[el.dataset.html] ?? ''; });
+
+  /* ----- hero ----- */
+  document.getElementById('heroFoto').src = C.heroFoto;
+  document.getElementById('heroMeta').innerHTML =
+    C.roles.map(r => `<span>${r}</span>`).join('');
+
+  /* ----- marquee (se duplica para el loop infinito) ----- */
+  const itemMarquee = ([txt, em]) =>
+    `<span>${txt}</span><em>${em}</em><img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045477626-brand--saturno-blanco.svg" alt="">`;
+  document.getElementById('marqueeTrack').innerHTML =
+    C.marquee.map(itemMarquee).join('') + C.marquee.map(itemMarquee).join('');
+
+  /* ----- capítulos ----- */
+  document.getElementById('capitulos').innerHTML = C.capitulos.map(c => `
+    <article>
+      <p class="acto">${c.acto} <small>${c.etiqueta}</small></p>
+      <p>${c.texto}</p>
+    </article>`).join('');
+
+  /* ----- plataformas ----- */
+  document.getElementById('plataformas').innerHTML = C.plataformas.map((p, i) => {
+    const num = 'S.0' + (i + 1);
+    if (!p.url) return `
+      <a class="pendiente" href="#" title="Muy pronto" onclick="return false">
+        <span class="idx">${num}</span>${p.nombre}<span class="flecha">pronto</span>
+      </a>`;
+    const accion = p.nombre.toLowerCase() === 'youtube' ? 'ver' : 'escuchar';
+    return `
+      <a href="${p.url}" target="_blank" rel="noopener">
+        <span class="idx">${num}</span>${p.nombre}<span class="flecha">${accion}&nbsp;→</span>
+      </a>`;
+  }).join('');
+
+  /* ----- player de Spotify (canción destacada) ----- */
+  if (C.spotifyTrackId) {
+    const pl = document.getElementById('playerSpotify');
+    pl.hidden = false;
+    pl.querySelector('.player-marco').innerHTML = `
+      <iframe src="https://open.spotify.com/embed/track/${C.spotifyTrackId}?theme=0"
+        title="${C.artista} — canción destacada" loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+    document.getElementById('playerPie').textContent = C.cancionDestacada || '';
+  }
+
+  /* ----- video (iframe de YouTube) ----- */
+  document.getElementById('pantallaVideo').innerHTML = `
+    <iframe src="https://www.youtube-nocookie.com/embed/${C.videoYouTubeId}"
+      title="${C.artista} — video" loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>`;
+
+  /* ----- galería ----- */
+  const g = [];
+  C.galeria.forEach((f, i) => {
+    g.push(`
+      <figure class="g-${f.tam} reveal">
+        <div data-par="${i % 2 ? '-0.05' : '0.05'}">
+          <img loading="lazy" src="${f.archivo}" alt="${C.artista} — ${f.serie}">
+        </div>
+        <figcaption><span>${f.serie}</span><i>№ ${String(i + 1).padStart(2, '0')}</i></figcaption>
+      </figure>`);
+    if (C.fraseGaleria && i + 1 === C.frasePosicion) {
+      g.push(`
+        <div class="tile g-4 reveal">
+          <p>${C.fraseGaleria}</p>
+          <span>${C.fraseGaleriaFirma}</span>
+        </div>`);
+    }
+  });
+  document.getElementById('galeriaGrid').innerHTML = g.join('');
+
+  /* ----- contacto ----- */
+  const correo = document.getElementById('correoLink');
+  correo.href = 'mailto:' + C.correo;
+  correo.innerHTML = C.correo.replace('@', '<wbr>@');
+  document.getElementById('igLink').href = 'https://instagram.com/' + C.instagram;
+  document.getElementById('igUser').textContent = '@' + C.instagram;
+  document.getElementById('ttLink').href = 'https://tiktok.com/@' + C.tiktok;
+  document.getElementById('ttUser').textContent = '@' + C.tiktok;
+
+  /* ----- fade-in al hacer scroll ----- */
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ----- luna ilustrada gira sutil con el scroll ----- */
+  const lunaIlustrada = document.querySelector('[data-spin]');
+  const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (lunaIlustrada && !sinMovimiento) {
+    addEventListener('scroll', () => {
+      requestAnimationFrame(() => { lunaIlustrada.style.transform = `rotate(${scrollY * 0.03}deg)`; });
+    }, { passive: true });
+  }
+
+  /* ============================================================
+     CIELO DÍA → NOCHE
+     La página amanece clara y anochece conforme bajas: el fondo
+     se interpola de papel a tinta a lo largo del scroll, y el
+     color del texto se voltea justo mientras la sección negra
+     del video cubre la pantalla (así nunca se pierde contraste).
+     Se apaga desde contenido.js con diaNoche:false.
+     ============================================================ */
+  if (C.diaNoche !== false) {
+    const DIA_FONDO = [246, 242, 234], NOCHE_FONDO = [16, 14, 15];
+    const DIA_TINTA = [20, 17, 18],   NOCHE_TINTA = [246, 242, 234];
+    const raiz = document.documentElement;
+    const seccionVideo = document.getElementById('video');
+    const lienzo = document.getElementById('cielo-estrellas');
+    const mezclar = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    const suavizar = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
+    let nocturnidad = 0;
+
+    function pintarCielo() {
+      const max = raiz.scrollHeight - innerHeight;
+      if (max <= 0) return;
+      const p = Math.min(1, Math.max(0, scrollY / max));
+      /* fondo: atardecer largo y progresivo (día pleno hasta ~15%) */
+      const tFondo = Math.pow(suavizar((p - 0.15) / 0.70), 1.5);
+      /* tinta: se voltea mientras el video (fondo negro propio) tapa la vista */
+      const v0 = seccionVideo.offsetTop / max;
+      const v1 = Math.min(1, (seccionVideo.offsetTop + seccionVideo.offsetHeight - innerHeight) / max);
+      const tTinta = suavizar((p - v0) / Math.max(0.08, v1 - v0));
+      raiz.style.setProperty('--fondo', `rgb(${mezclar(DIA_FONDO, NOCHE_FONDO, tFondo).join(',')})`);
+      raiz.style.setProperty('--tinta', `rgb(${mezclar(DIA_TINTA, NOCHE_TINTA, tTinta).join(',')})`);
+      raiz.style.setProperty('--inv', tTinta.toFixed(3));
+      nocturnidad = tFondo;
+      if (lienzo) lienzo.style.opacity = tFondo.toFixed(3);
+    }
+
+    addEventListener('scroll', pintarCielo, { passive: true });
+    addEventListener('resize', pintarCielo);
+    addEventListener('load', pintarCielo);
+    pintarCielo();
+
+    /* ----- estrellas que parpadean al anochecer ----- */
+    if (lienzo && !sinMovimiento) {
+      const ctxE = lienzo.getContext('2d');
+      let estrellas = [];
+      const sembrar = () => {
+        const k = Math.min(devicePixelRatio || 1, 2);
+        lienzo.width = innerWidth * k;
+        lienzo.height = innerHeight * k;
+        let s = 977;
+        const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+        estrellas = Array.from({ length: 130 }, () => ({
+          x: rnd(), y: rnd(), r: (0.6 + rnd() * 1.6) * k, f: 0.4 + rnd() * 1.2, p: rnd() * 6.28
+        }));
+      };
+      sembrar();
+      addEventListener('resize', sembrar);
+      const dibujarEstrellas = t => {
+        ctxE.clearRect(0, 0, lienzo.width, lienzo.height);
+        ctxE.fillStyle = '#f6f2ea';
+        estrellas.forEach(e => {
+          ctxE.globalAlpha = 0.9 * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t / 900 * e.f + e.p)));
+          ctxE.beginPath();
+          ctxE.arc(e.x * lienzo.width, e.y * lienzo.height, e.r, 0, 7);
+          ctxE.fill();
+        });
+      };
+      dibujarEstrellas(0);
+      addEventListener('scroll', () => { if (nocturnidad > 0.02) dibujarEstrellas(performance.now()); }, { passive: true });
+      (function brillar(t) {
+        if (nocturnidad > 0.02 && !document.hidden) dibujarEstrellas(t);
+        requestAnimationFrame(brillar);
+      })(0);
+    }
+  }
+
+  /* ----- parallax sutil (elementos con data-par) ----- */
+  if (!sinMovimiento) {
+    const conParallax = [...document.querySelectorAll('[data-par]')];
+    const pintarParallax = () => {
+      const ih = innerHeight;
+      conParallax.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > ih + 100) return;
+        const c = (r.top + r.height / 2 - ih / 2) / ih;
+        el.style.setProperty('--dy', (c * -120 * parseFloat(el.dataset.par)).toFixed(1) + 'px');
+      });
+    };
+    addEventListener('scroll', pintarParallax, { passive: true });
+    addEventListener('resize', pintarParallax);
+    pintarParallax();
+  }
+
+  /* ----- lightbox ----- */
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  document.querySelectorAll('.galeria figure').forEach(fig => {
+    fig.addEventListener('click', () => {
+      const img = fig.querySelector('img');
+      lbImg.src = img.src; lbImg.alt = img.alt; lb.showModal();
+    });
+  });
+  lb.addEventListener('click', () => lb.close());
+
+  /* ============================================================
+     INTRO — LUNA 3D EN FASES
+     Una luna dibujada en canvas (sin librerías) que pasa de luna
+     nueva a luna llena al abrir la página, con sombreado esférico
+     y cráteres procedurales. Clic = saltar. Se desactiva desde
+     contenido.js (intro.activar:false) y con prefers-reduced-motion.
+     Tip: agrega ?luna=lenta a la URL para verla en cámara lenta.
+     ============================================================ */
+  (function intro(){
+    const cfg = C.intro || { activar: true, duracionSegundos: 2.4 };
+    const el = document.getElementById('intro');
+    if (!cfg.activar || sinMovimiento) { el.remove(); return; }
+    document.documentElement.classList.add('con-intro');
+
+    const lenta = new URLSearchParams(location.search).get('luna') === 'lenta';
+    const DUR = (cfg.duracionSegundos || 2.4) * 1000 * (lenta ? 3 : 1);
+    const HOLD = 480;
+
+    const cv = document.getElementById('luna3d');
+    const ctx = cv.getContext('2d');
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const S = Math.round(Math.min(innerWidth, innerHeight) * 0.44);
+    cv.style.width = cv.style.height = S + 'px';
+    cv.width = cv.height = S * dpr;
+    const M = S * dpr, Cx = M / 2, R = M * 0.46;
+
+    /* cráteres procedurales (semilla fija: siempre la misma luna) */
+    const oc = document.createElement('canvas');
+    oc.width = oc.height = M;
+    const octx = oc.getContext('2d');
+    let seed = 20260713;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 30; i++) {
+      const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.84;
+      const r = R * (0.028 + rnd() * 0.078);
+      const x = Cx + Math.cos(a) * d, y = Cx + Math.sin(a) * d;
+      octx.beginPath(); octx.arc(x, y, r, 0, 7);
+      octx.fillStyle = `rgba(20,17,18,${0.10 + rnd() * 0.13})`; octx.fill();
+      octx.beginPath(); octx.arc(x - r * 0.22, y - r * 0.22, r * 0.78, 0, 7);
+      octx.fillStyle = `rgba(246,242,234,${0.05 + rnd() * 0.06})`; octx.fill();
+    }
+    /* "mares" grandes y suaves */
+    for (let i = 0; i < 5; i++) {
+      const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * R * 0.5;
+      const r = R * (0.16 + rnd() * 0.16);
+      octx.beginPath(); octx.arc(Cx + Math.cos(a) * d, Cx + Math.sin(a) * d, r, 0, 7);
+      octx.fillStyle = 'rgba(20,17,18,0.06)'; octx.fill();
+    }
+
+    function dibujar(p) {
+      /* p: 0 = luna nueva … 1 = luna llena (creciente por la derecha) */
+      const k = Math.cos(Math.PI * (1 - p));
+      ctx.clearRect(0, 0, M, M);
+
+      /* halo */
+      const halo = ctx.createRadialGradient(Cx, Cx, R * 0.55, Cx, Cx, R * 1.5);
+      halo.addColorStop(0, `rgba(246,242,234,${0.05 + p * 0.07})`);
+      halo.addColorStop(1, 'rgba(246,242,234,0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(Cx, Cx, R * 1.5, 0, 7); ctx.fill();
+
+      /* lado oscuro */
+      ctx.beginPath(); ctx.arc(Cx, Cx, R, 0, 7);
+      ctx.fillStyle = '#26211f'; ctx.fill();
+      ctx.globalAlpha = 0.4; ctx.drawImage(oc, 0, 0); ctx.globalAlpha = 1;
+
+      /* lado iluminado (semicírculo derecho + terminador elíptico) */
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(Cx, Cx - R);
+      ctx.arc(Cx, Cx, R, -Math.PI / 2, Math.PI / 2, false);
+      ctx.ellipse(Cx, Cx, Math.max(0.001, Math.abs(k)) * R, R, 0, Math.PI / 2, -Math.PI / 2, k < 0);
+      ctx.closePath();
+      ctx.clip();
+      const lit = ctx.createRadialGradient(Cx + R * 0.38, Cx - R * 0.3, R * 0.08, Cx, Cx, R * 1.06);
+      lit.addColorStop(0, '#f6f2ea');
+      lit.addColorStop(0.72, '#ddd5c6');
+      lit.addColorStop(1, '#b5ac9c');
+      ctx.fillStyle = lit;
+      ctx.beginPath(); ctx.arc(Cx, Cx, R, 0, 7); ctx.fill();
+      ctx.drawImage(oc, 0, 0);
+      ctx.restore();
+
+      /* borde fino */
+      ctx.beginPath(); ctx.arc(Cx, Cx, R, 0, 7);
+      ctx.lineWidth = Math.max(1.5, M * 0.004);
+      ctx.strokeStyle = 'rgba(246,242,234,0.25)'; ctx.stroke();
+    }
+
+    let terminado = false;
+    function terminar() {
+      if (terminado) return;
+      terminado = true;
+      dibujar(1);
+      el.classList.add('oculto');
+      document.documentElement.classList.remove('con-intro');
+      setTimeout(() => el.remove(), 800);
+    }
+
+    const t0 = performance.now();
+    (function frame(now) {
+      if (terminado) return;
+      const t = Math.min(1, (now - t0) / DUR);
+      const e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; /* easeInOutQuad */
+      dibujar(e);
+      if (t >= 1) { setTimeout(terminar, HOLD); return; }
+      requestAnimationFrame(frame);
+    })(t0);
+
+    el.addEventListener('click', terminar);
+  })();
+}
+</script>
+</body>
+</html>
