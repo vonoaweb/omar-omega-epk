@@ -1,7 +1,23 @@
 # The Omar Omega — Press Kit (EPK)
 
 One-pager estático (HTML/CSS/JS puro, sin dependencias) para el press kit de
-The Omar Omega (Omar Jiménez). Demo construida el 13-jul-2026.
+The Omar Omega (Omar Jiménez). Demo construida el 13-jul-2026; online desde el 14-jul-2026.
+
+## Arquitectura online (14-jul-2026)
+
+- **Hosting**: Vercel (proyecto `omar-omega-epk`, deploy vía MCP con solo los 3
+  archivos de texto: `index.html`, `admin.html`, `contenido.js`).
+- **Imágenes**: bucket público `omar-epk` en Supabase Storage (proyecto `vonoa-forms`,
+  ref `ajekywhnuepmqbxflala`) — las 15 fotos + los SVGs de marca.
+- **Contenido**: tabla `omar_epk` (fila id=1, jsonb) con RLS de solo lectura pública.
+  `index.html` la lee al cargar (timeout 2.5s → fallback a `contenido.js` local).
+- **Edición de Omar**: `admin.html` — panel con todos los campos + subida de fotos
+  (se reducen a 1600px y convierten a webp en el navegador). Guarda vía Edge Function
+  `omar-epk-guardar` (valida la frase secreta contra hash SHA-256 y escribe con
+  service role). **La frase secreta la tiene Fer** (no está en ningún archivo del repo).
+- **Motion** (refs: pixaura.com/thank-you, motion.page): estrellas canvas que aparecen
+  al anochecer, entrada del hero por líneas, parallax sutil (`data-par`), líneas de
+  sección que crecen, staggers en plataformas/capítulos.
 
 ## Correr local
 
