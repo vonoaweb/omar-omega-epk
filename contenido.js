@@ -108,7 +108,30 @@ window.CONTENIDO = {
   frasePosicion: 6,
   galeriaAviso: "clic para ampliar — uso editorial libre con crédito",
 
-  /* ---------- ACTO 05: CONTACTO ---------- */
+  /* ---------- ACTO 05: PARA MARCAS (patrocinios) ---------- */
+  // Sección para presentar tus eventos a marcas patrocinadoras
+  // (tequila, cerveza, etc.). Cuando tengas fotos y números de tus
+  // eventos, cámbialos aquí o desde el panel.
+  // Pon activar en false para esconder la sección completa.
+  marcas: {
+    activar: true,
+    intro: "The Omar Omega organiza showcases independientes en Guadalajara: música en vivo, comunidad y estética de cabaret. Si tu marca quiere estar en el siguiente acto, hablemos.",
+    // Cifras grandes con su descripción (asistentes, alcance, fechas…):
+    numeralia: [
+      { cifra: "07·2026", etiqueta: "primer showcase — Santa Tere, GDL" },
+      { cifra: "2", etiqueta: "álbumes en producción y gira de actos en camino" },
+      { cifra: "100%", etiqueta: "producción y comunidad independientes" }
+    ],
+    // Fotos de tus eventos (el público, el ambiente, el montaje):
+    fotos: [
+      { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045463150-img--fest-truck.webp", pie: "FIGC 2026" },
+      { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045464055-img--fest-walk.webp", pie: "FIGC 2026" },
+      { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045462056-img--fest-lean.webp", pie: "FIGC 2026" }
+    ],
+    ctaTexto: "Pedir kit de patrocinio"
+  },
+
+  /* ---------- ACTO 06: CONTACTO ---------- */
   correo: "the_omar_omega@outlook.com",
   instagram: "the_omar_omega",   // solo el usuario, sin @
   tiktok: "the_omar_omega",      // solo el usuario, sin @

@@ -321,6 +321,34 @@
   .g-4{grid-column:span 4}.g-5{grid-column:span 5}.g-6{grid-column:span 6}
   .g-7{grid-column:span 7}.g-8{grid-column:span 8}
 
+  /* ---------- para marcas (patrocinios) ---------- */
+  .marcas .intro-txt{font-style:italic;font-size:clamp(1rem,2vw,1.3rem);max-width:52ch;margin-bottom:3rem}
+  .numeralia{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:clamp(.8rem,2vw,1.2rem);margin-bottom:clamp(2.2rem,5vh,3.2rem);
+  }
+  .numeralia article{border:2px solid var(--tinta);padding:1.3rem 1.4rem 1.5rem}
+  .numeralia .cifra{font-family:"Anton",sans-serif;font-size:clamp(1.9rem,4vw,3.2rem);line-height:1;color:var(--red)}
+  .numeralia p{font-size:.82rem;font-style:italic;margin-top:.55rem;line-height:1.6}
+  .eventos{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:clamp(.8rem,2vw,1.6rem);align-items:start;margin-bottom:clamp(2.4rem,6vh,3.6rem);
+  }
+  .eventos figure img{width:100%;height:auto;border:2px solid var(--tinta)}
+  .eventos figcaption{
+    font-family:"Anton",sans-serif;font-size:.62rem;letter-spacing:.22em;
+    text-transform:uppercase;margin-top:.5rem;opacity:.85;
+  }
+  .cta-marcas{
+    display:inline-flex;align-items:center;gap:.9rem;
+    font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.06em;
+    font-size:clamp(1.1rem,2.6vw,1.9rem);
+    border:2px solid var(--tinta);padding:1rem 1.6rem;
+    box-shadow:8px 8px 0 var(--red);
+    transition:background .2s,color .2s,transform .2s;
+  }
+  .cta-marcas:hover{background:var(--tinta);color:var(--fondo);transform:translate(-2px,-2px)}
+
   /* ---------- contacto ---------- */
   .contacto .intro-txt{font-style:italic;font-size:clamp(1rem,2vw,1.3rem);max-width:46ch;margin-bottom:3rem}
   .correo{
@@ -428,6 +456,7 @@
     <a href="#musica">Música</a>
     <a href="#video">Video</a>
     <a href="#fotos">Fotos</a>
+    <a href="#marcas" id="navMarcas">Marcas</a>
     <a href="#contacto">Contacto</a>
   </nav>
 </header>
@@ -538,11 +567,26 @@
     </div>
   </section>
 
-  <!-- ============ CONTACTO ============ -->
-  <section class="seccion contacto" id="contacto" style="padding-top:0">
+  <!-- ============ PARA MARCAS ============ -->
+  <section class="seccion marcas" id="marcas" hidden style="padding-top:0">
     <div class="wrap">
       <div class="etiqueta reveal">
         <span class="num">ACTO 05</span>
+        <h2>Para marcas</h2>
+        <p class="aparte">patrocinios y alianzas</p>
+      </div>
+      <p class="intro-txt reveal" id="marcasIntro"></p>
+      <div class="numeralia reveal" id="numeralia"></div>
+      <div class="eventos reveal" id="eventosFotos"></div>
+      <p class="reveal"><a class="cta-marcas" id="marcasCta" href=""></a></p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="seccion contacto" id="contacto">
+    <div class="wrap">
+      <div class="etiqueta reveal">
+        <span class="num">ACTO 06</span>
         <h2>Contacto</h2>
         <p class="aparte">booking, prensa y colaboraciones</p>
       </div>
@@ -674,6 +718,23 @@ function iniciar(C){
     }
   });
   document.getElementById('galeriaGrid').innerHTML = g.join('');
+
+  /* ----- para marcas (patrocinios) ----- */
+  const M = C.marcas;
+  if (M && M.activar !== false) {
+    document.getElementById('marcas').hidden = false;
+    document.getElementById('marcasIntro').textContent = M.intro || '';
+    document.getElementById('numeralia').innerHTML = (M.numeralia || []).map(n => `
+      <article><p class="cifra">${n.cifra}</p><p>${n.etiqueta}</p></article>`).join('');
+    document.getElementById('eventosFotos').innerHTML = (M.fotos || []).map(f => `
+      <figure><img loading="lazy" src="${f.archivo}" alt="${C.artista} — evento"><figcaption>${f.pie || ''}</figcaption></figure>`).join('');
+    const ctaMarcas = document.getElementById('marcasCta');
+    ctaMarcas.textContent = (M.ctaTexto || 'Pedir kit de patrocinio') + ' →';
+    ctaMarcas.href = 'mailto:' + C.correo + '?subject=' + encodeURIComponent('Patrocinio — ' + C.artista);
+  } else {
+    const navM = document.getElementById('navMarcas');
+    if (navM) navM.remove();
+  }
 
   /* ----- contacto ----- */
   const correo = document.getElementById('correoLink');

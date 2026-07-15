@@ -40,6 +40,7 @@
   .foto-item{display:grid;grid-template-columns:86px 1fr 90px auto;gap:.8rem;align-items:center;border:1.5px solid var(--ink);padding:.7rem;margin-bottom:.7rem;background:#fff}
   .foto-item img{width:86px;height:64px;object-fit:cover;border:1px solid var(--ink)}
   .foto-item .acciones{display:flex;gap:.35rem}
+  .dato-item{display:grid;grid-template-columns:150px 1fr auto;gap:.8rem;align-items:end;border:1.5px solid var(--ink);padding:.7rem;margin-bottom:.7rem;background:#fff}
   button{font-family:"Anton",sans-serif;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--ink);background:var(--paper);padding:.5rem .9rem;cursor:pointer;font-size:.72rem}
   button:hover{background:var(--ink);color:var(--paper)}
   button.mini{padding:.3rem .55rem;border-width:1.5px}
@@ -104,8 +105,14 @@ function campo(etq, path, tipo = 'text', nota = '') {
   return `<label>${etq}</label><input type="text" data-path="${path}" value="${esc(v)}">${nota ? `<p class="nota">${nota}</p>` : ''}`;
 }
 
+const BOTONES_FOTO = `
+      <button class="mini" type="button" data-mover="-1" title="Subir">↑</button>
+      <button class="mini" type="button" data-mover="1" title="Bajar">↓</button>
+      <button class="mini" type="button" data-cambiar title="Cambiar esta foto por otra">⟳</button>
+      <button class="mini" type="button" data-borrar title="Quitar">✕</button>`;
+
 function filaFoto(f, i) {
-  return `<div class="foto-item" data-i="${i}">
+  return `<div class="foto-item" data-i="${i}" data-lista="galeria">
     <img src="${esc(f.archivo)}" alt="">
     <div>
       <label style="margin-top:0">Serie / pie</label>
@@ -117,11 +124,32 @@ function filaFoto(f, i) {
         ${[4,5,6,7,8].map(n => `<option value="${n}" ${f.tam == n ? 'selected' : ''}>${n}${n <= 5 ? ' (vertical)' : ' (ancha)'}</option>`).join('')}
       </select>
     </div>
-    <div class="acciones">
-      <button class="mini" type="button" data-mover="-1" title="Subir">↑</button>
-      <button class="mini" type="button" data-mover="1" title="Bajar">↓</button>
-      <button class="mini" type="button" data-borrar title="Quitar">✕</button>
+    <div class="acciones">${BOTONES_FOTO}</div>
+  </div>`;
+}
+
+function filaEvento(f, i) {
+  return `<div class="foto-item" data-i="${i}" data-lista="marcas.fotos" style="grid-template-columns:86px 1fr auto">
+    <img src="${esc(f.archivo)}" alt="">
+    <div>
+      <label style="margin-top:0">Pie de foto</label>
+      <input type="text" data-path="marcas.fotos.${i}.pie" value="${esc(f.pie)}">
     </div>
+    <div class="acciones">${BOTONES_FOTO}</div>
+  </div>`;
+}
+
+function filaNumeralia(n, i) {
+  return `<div class="dato-item" data-i="${i}">
+    <div>
+      <label style="margin-top:0">Cifra</label>
+      <input type="text" data-path="marcas.numeralia.${i}.cifra" value="${esc(n.cifra)}">
+    </div>
+    <div>
+      <label style="margin-top:0">Texto</label>
+      <input type="text" data-path="marcas.numeralia.${i}.etiqueta" value="${esc(n.etiqueta)}">
+    </div>
+    <button class="mini" type="button" data-borrar-dato title="Quitar">✕</button>
   </div>`;
 }
 
@@ -188,7 +216,21 @@ function pintar() {
   </fieldset>
 
   <fieldset>
-    <legend>Acto 05 — Contacto</legend>
+    <legend>Acto 05 — Para marcas (patrocinios)</legend>
+    ${campo('Mostrar esta sección en la página', 'marcas.activar', 'check')}
+    ${campo('Texto de introducción', 'marcas.intro', 'textarea', 'Lo que le dices a las marcas (tequila, cerveza…) para patrocinar tus eventos.')}
+    <label style="margin-top:1.4rem">Numeralia (los números de tus eventos)</label>
+    <div id="listaNumeralia">${D.marcas.numeralia.map(filaNumeralia).join('')}</div>
+    <button type="button" id="btnAgregarDato">+ Agregar dato</button>
+    <p class="nota">Ej.: cifra "350", texto "asistentes en el último showcase".</p>
+    <label style="margin-top:1.4rem">Fotos de eventos (público, ambiente, montaje)</label>
+    <div id="listaEventos">${D.marcas.fotos.map(filaEvento).join('')}</div>
+    <button type="button" id="btnAgregarEvento">+ Agregar foto de evento</button>
+    ${campo('Texto del botón para marcas', 'marcas.ctaTexto')}
+  </fieldset>
+
+  <fieldset>
+    <legend>Acto 06 — Contacto</legend>
     <div class="fila">
       <div>${campo('Correo', 'correo')}</div>
       <div>${campo('Pie de página', 'piePagina')}</div>
@@ -209,18 +251,39 @@ function pintar() {
     D.galeria.push({ archivo: url, serie: 'Nueva', tam: 6 });
     pintar();
   });
-  document.querySelectorAll('.foto-item [data-mover]').forEach(b => b.onclick = () => {
-    const i = +b.closest('.foto-item').dataset.i, j = i + (+b.dataset.mover);
-    if (j < 0 || j >= D.galeria.length) return;
-    [D.galeria[i], D.galeria[j]] = [D.galeria[j], D.galeria[i]];
+  document.getElementById('btnAgregarEvento').onclick = () => subirFoto(url => {
+    D.marcas.fotos.push({ archivo: url, pie: 'Evento' });
     pintar();
   });
+  document.getElementById('btnAgregarDato').onclick = () => {
+    D.marcas.numeralia.push({ cifra: '', etiqueta: '' });
+    pintar();
+  };
+  /* las listas de fotos comparten acciones: subir/bajar, cambiar (⟳) y quitar */
+  const listaDe = el => {
+    const item = el.closest('.foto-item');
+    return { arr: get(D, item.dataset.lista || 'galeria'), i: +item.dataset.i };
+  };
+  document.querySelectorAll('.foto-item [data-mover]').forEach(b => b.onclick = () => {
+    const { arr, i } = listaDe(b), j = i + (+b.dataset.mover);
+    if (j < 0 || j >= arr.length) return;
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+    pintar();
+  });
+  document.querySelectorAll('.foto-item [data-cambiar]').forEach(b => b.onclick = () => {
+    const { arr, i } = listaDe(b);
+    subirFoto(url => { arr[i].archivo = url; pintar(); });
+  });
   document.querySelectorAll('.foto-item [data-borrar]').forEach(b => b.onclick = () => {
-    const i = +b.closest('.foto-item').dataset.i;
+    const { arr, i } = listaDe(b);
     if (confirm('¿Quitar esta foto de la página? (el archivo no se borra)')) {
-      D.galeria.splice(i, 1);
+      arr.splice(i, 1);
       pintar();
     }
+  });
+  document.querySelectorAll('.dato-item [data-borrar-dato]').forEach(b => b.onclick = () => {
+    D.marcas.numeralia.splice(+b.closest('.dato-item').dataset.i, 1);
+    pintar();
   });
 }
 
@@ -310,6 +373,8 @@ function estado(t) { document.getElementById('estado').textContent = t; }
     });
     const filas = await r.json();
     D = filas[0].data;
+    /* si el contenido guardado aún no tiene la sección de marcas, se inicializa */
+    if (!D.marcas) D.marcas = { activar: false, intro: '', numeralia: [], fotos: [], ctaTexto: 'Pedir kit de patrocinio' };
     document.getElementById('clave').value = sessionStorage.getItem('omarClave') || '';
     pintar();
     estado('Contenido cargado. Edita y guarda cuando quieras.');
