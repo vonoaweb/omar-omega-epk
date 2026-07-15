@@ -49,30 +49,56 @@
   .barra-guardar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);padding:1rem clamp(1rem,4vw,3rem);display:flex;align-items:center;gap:1rem;z-index:20}
   .barra-guardar .estado{color:var(--paper);font-style:italic;font-size:.85rem;flex:1}
   .subiendo{opacity:.5;pointer-events:none}
-  @media(max-width:640px){.fila,.fila3{grid-template-columns:1fr}.foto-item{grid-template-columns:66px 1fr;grid-auto-rows:auto}}
+  /* candado de entrada */
+  #login{position:fixed;inset:0;background:var(--paper);display:grid;place-items:center;padding:1.5rem;z-index:100}
+  .login-caja{width:100%;max-width:420px;border:2px solid var(--ink);padding:2rem 1.8rem;text-align:center}
+  .login-caja img{height:52px;margin:0 auto 1.2rem}
+  .login-caja h1{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.1em;font-size:1.2rem;margin-bottom:.6rem}
+  .login-caja p{font-size:.9rem;line-height:1.6;margin-bottom:1.4rem}
+  .login-caja input{margin-bottom:1rem;text-align:center;font-size:1.05rem;letter-spacing:.1em}
+  .login-caja button{width:100%;padding:.95rem;font-size:1rem}
+  #loginError{color:var(--red);font-style:italic;font-size:.85rem;min-height:1.2em;margin:.9rem 0 0}
+  #app[hidden]{display:none}
+  /* botón cambiar foto: claro y grande */
+  .btn-cambiar{background:var(--yellow)!important;border-color:var(--ink)!important;color:var(--ink)!important;white-space:nowrap}
+  .btn-cambiar:hover{background:var(--ink)!important;color:var(--paper)!important}
+  .foto-item img{cursor:pointer}
+  @media(max-width:640px){.fila,.fila3{grid-template-columns:1fr}.foto-item{grid-template-columns:66px 1fr;grid-auto-rows:auto}.foto-item .acciones{grid-column:1/-1}}
 </style>
 </head>
 <body>
+
+<!-- ===== CANDADO DE ENTRADA ===== -->
+<div id="login">
+  <div class="login-caja">
+    <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045474584-brand--glifo-negro.svg" alt="">
+    <h1>Panel — The Omar Omega</h1>
+    <p>Escribe tu frase secreta para entrar y editar tu press kit.</p>
+    <input type="password" id="clave" autocomplete="current-password" placeholder="Frase secreta" enterkeyhint="go">
+    <button class="rojo" id="btnEntrar" type="button">Entrar</button>
+    <p id="loginError"></p>
+  </div>
+</div>
+
+<!-- ===== PANEL (oculto hasta entrar) ===== -->
+<div id="app" hidden>
 <header>
   <div class="marca">
     <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045474584-brand--glifo-negro.svg" alt="">
     <h1>Panel de contenido</h1>
   </div>
-  <a href="index.html" target="_blank" rel="noopener">ver la página →</a>
+  <div style="display:flex;gap:1.2rem;align-items:center">
+    <a href="index.html" target="_blank" rel="noopener">ver la página →</a>
+    <a href="#" id="salir">salir</a>
+  </div>
 </header>
 
 <main>
   <div class="aviso-clave">
     <b>Omar:</b> aquí cambias los textos, links y fotos de tu press kit.
-    Edita lo que quieras y aprieta <b>GUARDAR CAMBIOS</b> (necesitas tu frase secreta).
-    Los cambios se ven en la página al instante — recárgala para comprobar.
+    Para cambiar una foto: pícale a la foto o al botón amarillo <b>⟳ Cambiar</b>.
+    Al final aprieta <b>GUARDAR CAMBIOS</b> y recarga tu página para verlo.
   </div>
-
-  <fieldset>
-    <legend>Tu frase secreta</legend>
-    <label for="clave">Frase secreta (te la pasó Fer)</label>
-    <input type="password" id="clave" autocomplete="current-password" placeholder="••••••••">
-  </fieldset>
 
   <div id="formulario"><!-- se genera con JS --></div>
 </main>
@@ -80,6 +106,7 @@
 <div class="barra-guardar">
   <span class="estado" id="estado">Cargando contenido…</span>
   <button class="rojo" id="btnGuardar" type="button">Guardar cambios</button>
+</div>
 </div>
 
 <script>
@@ -106,9 +133,9 @@ function campo(etq, path, tipo = 'text', nota = '') {
 }
 
 const BOTONES_FOTO = `
+      <button class="mini btn-cambiar" type="button" data-cambiar title="Cambiar esta foto por otra">⟳ Cambiar</button>
       <button class="mini" type="button" data-mover="-1" title="Subir">↑</button>
       <button class="mini" type="button" data-mover="1" title="Bajar">↓</button>
-      <button class="mini" type="button" data-cambiar title="Cambiar esta foto por otra">⟳</button>
       <button class="mini" type="button" data-borrar title="Quitar">✕</button>`;
 
 function filaFoto(f, i) {
@@ -270,10 +297,13 @@ function pintar() {
     [arr[i], arr[j]] = [arr[j], arr[i]];
     pintar();
   });
-  document.querySelectorAll('.foto-item [data-cambiar]').forEach(b => b.onclick = () => {
-    const { arr, i } = listaDe(b);
+  const cambiarFoto = el => {
+    const { arr, i } = listaDe(el);
     subirFoto(url => { arr[i].archivo = url; pintar(); });
-  });
+  };
+  document.querySelectorAll('.foto-item [data-cambiar]').forEach(b => b.onclick = () => cambiarFoto(b));
+  /* pícale a la miniatura para cambiar la foto */
+  document.querySelectorAll('.foto-item img').forEach(im => im.onclick = () => cambiarFoto(im));
   document.querySelectorAll('.foto-item [data-borrar]').forEach(b => b.onclick = () => {
     const { arr, i } = listaDe(b);
     if (confirm('¿Quitar esta foto de la página? (el archivo no se borra)')) {
@@ -365,8 +395,8 @@ document.getElementById('btnGuardar').onclick = async () => {
 
 function estado(t) { document.getElementById('estado').textContent = t; }
 
-/* ---------- carga inicial ---------- */
-(async () => {
+/* ---------- cargar el contenido y mostrar el editor ---------- */
+async function cargar() {
   try {
     const r = await fetch(`${SUPA_URL}/rest/v1/omar_epk?id=eq.1&select=data`, {
       headers: { apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON }
@@ -375,13 +405,56 @@ function estado(t) { document.getElementById('estado').textContent = t; }
     D = filas[0].data;
     /* si el contenido guardado aún no tiene la sección de marcas, se inicializa */
     if (!D.marcas) D.marcas = { activar: false, intro: '', numeralia: [], fotos: [], ctaTexto: 'Pedir kit de patrocinio' };
-    document.getElementById('clave').value = sessionStorage.getItem('omarClave') || '';
     pintar();
     estado('Contenido cargado. Edita y guarda cuando quieras.');
   } catch (e) {
     estado('No se pudo cargar el contenido: ' + e.message);
   }
-})();
+}
+
+/* ---------- candado de entrada (la frase secreta) ---------- */
+const login = document.getElementById('login');
+const app = document.getElementById('app');
+const inputClave = document.getElementById('clave');
+const loginError = document.getElementById('loginError');
+
+async function verificarClave(clave) {
+  const r = await fetch(FN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: SUPA_ANON, authorization: 'Bearer ' + SUPA_ANON },
+    body: JSON.stringify({ clave, verificar: true })
+  });
+  return r.ok;
+}
+
+async function entrar(silencioso) {
+  const clave = inputClave.value.trim();
+  if (!clave) { if (!silencioso) loginError.textContent = 'Escribe tu frase secreta.'; return; }
+  if (!silencioso) loginError.textContent = 'Comprobando…';
+  const ok = await verificarClave(clave).catch(() => false);
+  if (!ok) {
+    loginError.textContent = silencioso ? '' : 'Frase secreta incorrecta.';
+    if (silencioso) { inputClave.value = ''; inputClave.focus(); }
+    return;
+  }
+  sessionStorage.setItem('omarClave', clave);
+  login.style.display = 'none';
+  app.hidden = false;
+  cargar();
+}
+
+document.getElementById('btnEntrar').onclick = () => entrar(false);
+inputClave.addEventListener('keydown', e => { if (e.key === 'Enter') entrar(false); });
+document.getElementById('salir').onclick = e => {
+  e.preventDefault();
+  sessionStorage.removeItem('omarClave');
+  location.reload();
+};
+
+/* si ya entró antes en esta sesión, pasa directo */
+const guardada = sessionStorage.getItem('omarClave');
+if (guardada) { inputClave.value = guardada; entrar(true); }
+else inputClave.focus();
 </script>
 </body>
 </html>
