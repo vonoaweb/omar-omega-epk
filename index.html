@@ -190,6 +190,22 @@
   .marquee img{height:1.15em;width:auto}
   @keyframes desfile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+  /* ---------- índice de secciones (mini secciones) ---------- */
+  .indice{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:.7rem;padding-top:1.8rem;
+  }
+  .indice a{
+    display:flex;align-items:baseline;gap:.55rem;
+    border:1.5px solid var(--tinta);padding:.85rem .95rem;
+    font-family:"Anton",sans-serif;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    transition:background .18s,color .18s;
+  }
+  .indice a span{color:var(--red);font-size:.68rem}
+  .indice a i{margin-left:auto;font-family:"Libre Baskerville",serif;font-style:italic;letter-spacing:0;opacity:.7;font-size:.9em}
+  .indice a:hover{background:var(--tinta);color:var(--fondo)}
+  .indice a:hover span{color:var(--yellow)}
+
   /* ---------- section scaffolding ---------- */
   .seccion{padding-block:clamp(5.5rem,12vh,9.5rem)}
   .etiqueta{
@@ -402,8 +418,9 @@
   @media (max-width:900px){
     .hero{min-height:auto;padding-top:6rem}
     .hero .wrap{grid-template-columns:1fr}
-    .hero-fig{order:-1;max-width:78%;justify-self:end}
-    .hero-fig .firma{width:70%;left:-24%}
+    .hero-fig{max-width:100%}
+    .hero-fig .firma{width:58%;left:-4%}
+    .hero-title{padding-bottom:.4rem}
     .saturno-orbita{right:auto;left:4%;top:12%}
     .manifiesto .cuerpo{grid-template-columns:1fr}
     .manifiesto aside{grid-auto-flow:column;justify-content:start;align-items:center}
@@ -416,6 +433,22 @@
     .brand img.wm{display:none}
     nav{gap:.9rem}
     nav a{font-size:.62rem;letter-spacing:.14em}
+  }
+  @media (max-width:700px){
+    /* header en dos filas: logo grande + menú de chips fáciles de picar */
+    header{flex-wrap:wrap;padding:.6rem 1rem 0}
+    .brand{width:100%;gap:.7rem}
+    .brand img.glifo{height:34px}
+    .brand img.wm{display:block;height:15px}
+    nav{width:100%;overflow-x:auto;gap:.5rem;padding:.6rem 0 .7rem;scrollbar-width:none}
+    nav::-webkit-scrollbar{display:none}
+    nav a{font-size:.72rem;letter-spacing:.12em;padding:.72rem .95rem;border:1.5px solid var(--tinta);white-space:nowrap}
+    nav a::after{display:none}
+    .hero{padding-top:8.2rem}
+    .seccion{padding-block:3.8rem}
+    .etiqueta{margin-bottom:1.8rem}
+    .indice{grid-template-columns:1fr 1fr;gap:.55rem}
+    .indice a{padding:.8rem .7rem;font-size:.7rem;letter-spacing:.1em}
   }
   @media (max-width:560px){
     .g-4,.g-5,.g-6,.g-7,.g-8{grid-column:span 12}
@@ -491,6 +524,18 @@
   <!-- ============ MARQUEE ============ -->
   <div class="marquee" aria-hidden="true">
     <div class="track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ============ ÍNDICE DE SECCIONES ============ -->
+  <div class="wrap">
+    <nav class="indice reveal" aria-label="Secciones del press kit">
+      <a href="#manifiesto"><span>01</span>El universo<i>→</i></a>
+      <a href="#musica"><span>02</span>Música<i>→</i></a>
+      <a href="#video"><span>03</span>El video<i>→</i></a>
+      <a href="#fotos"><span>04</span>Fotos<i>→</i></a>
+      <a href="#marcas" id="indiceMarcas"><span>05</span>Para marcas<i>→</i></a>
+      <a href="#contacto"><span>06</span>Contacto<i>→</i></a>
+    </nav>
   </div>
 
   <!-- ============ MANIFIESTO ============ -->
@@ -734,6 +779,8 @@ function iniciar(C){
   } else {
     const navM = document.getElementById('navMarcas');
     if (navM) navM.remove();
+    const indM = document.getElementById('indiceMarcas');
+    if (indM) indM.remove();
   }
 
   /* ----- contacto ----- */
