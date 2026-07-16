@@ -52,6 +52,8 @@ window.CONTENIDO = {
   capitulos: [
     { acto: "α", etiqueta: "PUBLICADO",
       texto: "Act 0 — Cabaret, Visiō. El prólogo: un popurrí en vivo de cuatro canciones, entre terciopelo rojo y micrófono de bulbo. Ya disponible." },
+    { acto: "25 mg", etiqueta: "EN PRODUCCIÓN",
+      texto: "25 miligramos — lo que sigue justo después del prólogo." },
     { acto: "I–II", etiqueta: "EN PRODUCCIÓN",
       texto: "Dos álbumes en camino: dos capítulos, dos géneros, un mismo universo." },
     { acto: "III–IV", etiqueta: "PRÓXIMAMENTE",
