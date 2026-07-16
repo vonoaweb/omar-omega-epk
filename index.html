@@ -125,6 +125,7 @@
   .hero{
     display:flex;flex-direction:column;justify-content:center;
     padding:clamp(7rem,13vh,9rem) 0 clamp(2.5rem,6vh,4rem);
+    overflow:hidden; /* recorta el listón diagonal que se sale a los lados */
   }
   .hero .wrap{width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1rem,3vw,3rem);align-items:center}
   .hero-title{position:relative;z-index:2}
@@ -137,12 +138,11 @@
     font-size:clamp(3.4rem,11.5vw,10.5rem);
     line-height:.92;letter-spacing:.005em;
   }
-  .hero-title h1 .linea{display:block}
+  .hero-title h1 .linea{display:block;color:var(--red)}
   .hero-title h1 .the{
     display:block;font-size:.32em;letter-spacing:.35em;
     -webkit-text-stroke:1.5px var(--tinta);color:transparent;
   }
-  .hero-title h1 .omega{color:var(--red)}
   .hero-meta{
     margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;
     font-family:"Anton",sans-serif;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
@@ -154,7 +154,9 @@
     box-shadow:14px 14px 0 var(--red);
     overflow:hidden;
   }
-  .hero-fig img.foto{width:100%;height:auto}
+  /* zoom lento y cinematográfico de la foto principal */
+  .hero-fig img.foto{width:100%;height:auto;animation:zoomHero 20s ease-in-out infinite alternate}
+  @keyframes zoomHero{from{transform:scale(1)}to{transform:scale(1.07)}}
   .hero-fig figcaption{
     font-style:italic;font-size:.78rem;margin-top:1rem;opacity:.85;
   }
@@ -177,6 +179,20 @@
     0%,100%{transform:translateY(0) rotate(-8deg)}
     50%{transform:translateY(-26px) rotate(6deg)}
   }
+
+  /* ---------- listón diagonal con el nombre ---------- */
+  .liston{
+    position:absolute;left:-6%;right:-6%;bottom:-1.4rem;
+    transform:rotate(-4.5deg);z-index:3;pointer-events:none;
+    background:var(--red);color:var(--paper);
+    border-block:2px solid var(--ink);
+    overflow:hidden;white-space:nowrap;padding:.55rem 0;
+    box-shadow:0 10px 28px rgba(20,17,18,.22);
+    opacity:0;animation:entrar .9s ease 1.5s forwards;
+  }
+  .liston .track{display:inline-flex;align-items:center;gap:1.7rem;width:max-content;animation:desfile 16s linear infinite}
+  .liston span{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(.85rem,1.4vw,1.1rem);letter-spacing:.24em}
+  .liston i{font-style:normal;color:var(--yellow);font-size:.9em}
 
   /* ---------- marquee ---------- */
   .marquee{
@@ -319,11 +335,14 @@
     align-items:start;
   }
   .galeria figure{position:relative;cursor:zoom-in}
+  /* las fotos se revelan como cortina al entrar */
   .galeria figure img{
     width:100%;height:auto;border:2px solid var(--tinta);
-    transition:transform .25s ease;
+    clip-path:inset(0 100% 0 0);
+    transition:transform .25s ease, clip-path .85s cubic-bezier(.6,0,.2,1);
   }
-  .galeria figure:hover img{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--red)}
+  .galeria figure.in img{clip-path:inset(0 0 0 0)}
+  .galeria figure:hover img{transform:translate(-4px,-4px) scale(1.015);box-shadow:6px 6px 0 var(--red)}
   .galeria figcaption{
     display:flex;justify-content:space-between;gap:1rem;
     font-family:"Anton",sans-serif;font-size:.62rem;letter-spacing:.22em;
@@ -367,6 +386,11 @@
     transition:background .2s,color .2s,transform .2s;
   }
   .cta-marcas:hover{background:var(--tinta);color:var(--fondo);transform:translate(-2px,-2px)}
+  .cta-marcas.in{animation:latir 2.6s ease-in-out 1s 3}
+  @keyframes latir{
+    0%,100%{box-shadow:8px 8px 0 var(--red)}
+    50%{box-shadow:8px 8px 0 var(--red), 0 0 0 6px rgba(190,30,45,.18)}
+  }
 
   /* ---------- contacto ---------- */
   .contacto .intro-txt{font-style:italic;font-size:clamp(1rem,2vw,1.3rem);max-width:46ch;margin-bottom:3rem}
@@ -424,7 +448,8 @@
     .hero-fig{max-width:100%}
     .hero-fig .firma{width:58%;left:-4%}
     .hero-title{padding-bottom:.4rem}
-    .saturno-orbita{right:auto;left:4%;top:12%}
+    /* al hueco libre a la derecha del nombre (medida fija: no depende del alto) */
+    .saturno-wrap{right:6%;left:auto;top:15.5rem}
     .manifiesto .cuerpo{grid-template-columns:1fr}
     .manifiesto aside{grid-auto-flow:column;justify-content:start;align-items:center}
     .manifiesto aside img.luna{width:150px}
@@ -458,7 +483,8 @@
     .hero-fig{max-width:100%}
   }
   @media (prefers-reduced-motion:reduce){
-    .saturno-orbita,.marquee .track{animation:none;opacity:1}
+    .saturno-orbita,.marquee .track,.liston .track{animation:none;opacity:1}
+    .liston{animation:none;opacity:1}
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
     .hero-title .kicker,.hero-title h1 .the,.hero-title h1 .linea,.hero-meta,
@@ -467,6 +493,9 @@
     .etiqueta::before{transition:none;transform:scaleX(1)}
     .capitulos article,.plataformas a{transition:none;opacity:1;transform:none}
     [data-par]{transform:none !important}
+    .hero-fig img.foto{animation:none}
+    .galeria figure img{clip-path:none;transition:none}
+    .cta-marcas.in{animation:none}
   }
 </style>
 </head>
@@ -516,12 +545,13 @@
       </div>
       <figure class="hero-fig" data-par="0.06">
         <div class="frame">
-          <img class="foto" id="heroFoto" src="" width="1067" height="1600" alt="The Omar Omega bajo un spotlight rojo, sesión cabaret" fetchpriority="high">
+          <img class="foto" id="heroFoto" src="" alt="The Omar Omega — retrato editorial con abrigo de pelo y reflejos" fetchpriority="high">
         </div>
         <img class="firma" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045473172-brand--firma-rojo.svg" alt="Firma de Omar Jiménez">
         <figcaption data-c="heroPie"></figcaption>
       </figure>
     </div>
+    <div class="liston" aria-hidden="true"><div class="track" id="listonTrack"></div></div>
   </section>
 
   <!-- ============ MARQUEE ============ -->
@@ -693,6 +723,9 @@ const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
 
 function iniciar(C){
 
+  /* ¿el usuario pidió menos movimiento? (se respeta en todas las animaciones) */
+  const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ----- textos simples (data-c) y con formato (data-html) ----- */
   document.querySelectorAll('[data-c]').forEach(el => { el.textContent = C[el.dataset.c] ?? ''; });
   document.querySelectorAll('[data-html]').forEach(el => { el.innerHTML = C[el.dataset.html] ?? ''; });
@@ -707,6 +740,12 @@ function iniciar(C){
     `<span>${txt}</span><em>${em}</em><img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045477626-brand--saturno-blanco.svg" alt="">`;
   document.getElementById('marqueeTrack').innerHTML =
     C.marquee.map(itemMarquee).join('') + C.marquee.map(itemMarquee).join('');
+
+  /* ----- listón diagonal con el nombre ----- */
+  const listonTrack = document.getElementById('listonTrack');
+  if (listonTrack) {
+    listonTrack.innerHTML = Array(16).fill(`<span>${C.artista}</span><i>✶</i>`).join('');
+  }
 
   /* ----- capítulos ----- */
   document.getElementById('capitulos').innerHTML = C.capitulos.map(c => `
@@ -774,6 +813,25 @@ function iniciar(C){
     document.getElementById('marcasIntro').textContent = M.intro || '';
     document.getElementById('numeralia').innerHTML = (M.numeralia || []).map(n => `
       <article><p class="cifra">${n.cifra}</p><p>${n.etiqueta}</p></article>`).join('');
+
+    /* los números puros suben de 0 a su valor cuando entran en pantalla */
+    if (!sinMovimiento) {
+      const contar = el => {
+        const m = String(el.textContent).trim().match(/^(\d+)([%+]?)$/);
+        if (!m) return;                       /* "07·2026" y demás se quedan fijos */
+        const fin = +m[1], sufijo = m[2], dur = 1100, t0 = performance.now();
+        (function paso(now) {
+          const t = Math.min(1, (now - t0) / dur);
+          const e = 1 - Math.pow(1 - t, 3);   /* easeOutCubic */
+          el.textContent = Math.round(fin * e) + sufijo;
+          if (t < 1) requestAnimationFrame(paso);
+        })(t0);
+      };
+      const ioNum = new IntersectionObserver(es => {
+        es.forEach(e => { if (e.isIntersecting) { contar(e.target); ioNum.unobserve(e.target); } });
+      }, { threshold: .6 });
+      document.querySelectorAll('#numeralia .cifra').forEach(el => ioNum.observe(el));
+    }
     document.getElementById('eventosFotos').innerHTML = (M.fotos || []).map(f => `
       <figure><img loading="lazy" src="${f.archivo}" alt="${C.artista} — evento"><figcaption>${f.pie || ''}</figcaption></figure>`).join('');
     const ctaMarcas = document.getElementById('marcasCta');
@@ -803,7 +861,6 @@ function iniciar(C){
 
   /* ----- luna ilustrada gira sutil con el scroll ----- */
   const lunaIlustrada = document.querySelector('[data-spin]');
-  const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (lunaIlustrada && !sinMovimiento) {
     addEventListener('scroll', () => {
       requestAnimationFrame(() => { lunaIlustrada.style.transform = `rotate(${scrollY * 0.03}deg)`; });

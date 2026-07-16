@@ -34,8 +34,8 @@ window.CONTENIDO = {
   },
 
   /* ---------- FOTO PRINCIPAL (hero) ---------- */
-  heroFoto: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045464859-img--hero.webp",
-  heroPie: "α Alpha: Act 0 — Cabaret, Visiō. Sesión en vivo, 2026.",
+  heroFoto: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784225626820-hero-moogler.webp",
+  heroPie: "Moogler, 2026 — dirección de arte y estilismo: estudio The Omar Omega.",
 
   /* ---------- CINTA NEGRA QUE SE DESLIZA ---------- */
   // Pares de [TEXTO GRANDE, acento en cursiva]
@@ -48,14 +48,14 @@ window.CONTENIDO = {
   /* ---------- ACTO 01: EL UNIVERSO ---------- */
   // Puedes usar <em>palabras</em> para resaltarlas en rojo.
   manifiesto: "La música de The Omar Omega es <em>un viaje en el tiempo</em>: cada álbum es un capítulo, y cada capítulo habita un género distinto. Del bolero de cabaret al synth de medianoche, todos los mundos ocurren a la vez — y todos son él.",
-  manifiestoNota: "Proyecto encabezado por Omar Jiménez desde Guadalajara. Voz, producción y dirección creativa propias; vestuario y dirección de arte en colaboración con su estudio. Dos álbumes en producción; el tercer capítulo comienza en octubre de 2026.",
+  manifiestoNota: "Proyecto encabezado por Omar Jiménez desde Guadalajara. Voz, producción y dirección creativa propias; vestuario y dirección de arte en colaboración con su estudio. Dos álbumes en producción y los siguientes actos ya en el mapa.",
   capitulos: [
-    { acto: "α", etiqueta: "ACT 0",
-      texto: "Cabaret, Visiō — el prólogo. Un popurrí en vivo de cuatro canciones, entre terciopelo rojo y micrófono de bulbo." },
+    { acto: "α", etiqueta: "PUBLICADO",
+      texto: "Act 0 — Cabaret, Visiō. El prólogo: un popurrí en vivo de cuatro canciones, entre terciopelo rojo y micrófono de bulbo. Ya disponible." },
     { acto: "I–II", etiqueta: "EN PRODUCCIÓN",
       texto: "Dos álbumes en camino: dos capítulos, dos géneros, un mismo universo." },
-    { acto: "III", etiqueta: "OCT 2026",
-      texto: "El tercer capítulo abre en octubre. El viaje apenas comienza." }
+    { acto: "III–IV", etiqueta: "PRÓXIMAMENTE",
+      texto: "Los siguientes mundos del universo. El viaje apenas comienza." }
   ],
 
   /* ---------- ACTO 02: MÚSICA ---------- */
@@ -87,17 +87,15 @@ window.CONTENIDO = {
   // "serie" = el texto que aparece bajo la foto.
   galeria: [
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045455756-img--cab-boa.webp",       serie: "Cabaret",   tam: 4 },
-    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045456652-img--cab-casio.webp",     serie: "Cabaret",   tam: 8 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045464055-img--fest-walk.webp",     serie: "FIGC 2026", tam: 4 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045457359-img--cab-circulo.webp",   serie: "Cabaret",   tam: 4 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045459694-img--cab-espalda.webp",   serie: "Cabaret",   tam: 4 },
-    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045466621-img--moog-duo.webp",      serie: "Moogler",   tam: 8 },
-    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045468279-img--moog-fur.webp",      serie: "Moogler",   tam: 6 },
+    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045468279-img--moog-fur.webp",      serie: "Moogler",   tam: 8 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045463150-img--fest-truck.webp",    serie: "FIGC 2026", tam: 6 },
+    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045467438-img--moog-escalera.webp", serie: "Moogler",   tam: 6 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045458963-img--cab-croon.webp",     serie: "Cabaret",   tam: 4 },
-    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045467438-img--moog-escalera.webp", serie: "Moogler",   tam: 8 },
+    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045458196-img--cab-corazon.webp",   serie: "Cabaret",   tam: 8 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045462056-img--fest-lean.webp",     serie: "FIGC 2026", tam: 5 },
-    { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045458196-img--cab-corazon.webp",   serie: "Cabaret",   tam: 7 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045465747-img--moog-crouch.webp",   serie: "Moogler",   tam: 7 },
     { archivo: "https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045461039-img--cab-mic.webp",       serie: "Cabaret",   tam: 5 }
   ],
