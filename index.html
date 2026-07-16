@@ -117,6 +117,21 @@
   }
   nav a:hover::after{width:100%}
 
+  /* ---------- botón hamburguesa (solo en móvil) ---------- */
+  .hamb{
+    display:none;flex-direction:column;justify-content:center;gap:6px;
+    width:46px;height:46px;padding:0;
+    background:none;border:0;cursor:pointer;
+  }
+  .hamb span{
+    display:block;width:26px;height:2.5px;margin:0 auto;
+    background:var(--tinta);border-radius:2px;
+    transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .2s;
+  }
+  .hamb.abierto span:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+  .hamb.abierto span:nth-child(2){opacity:0}
+  .hamb.abierto span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
+
   main{padding-top:0}
   section{position:relative}
   .wrap{padding-left:var(--pad);padding-right:var(--pad);max-width:1420px;margin:0 auto}
@@ -125,7 +140,6 @@
   .hero{
     display:flex;flex-direction:column;justify-content:center;
     padding:clamp(7rem,13vh,9rem) 0 clamp(2.5rem,6vh,4rem);
-    overflow:hidden; /* recorta el listón diagonal que se sale a los lados */
   }
   .hero .wrap{width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1rem,3vw,3rem);align-items:center}
   .hero-title{position:relative;z-index:2}
@@ -180,15 +194,27 @@
     50%{transform:translateY(-26px) rotate(6deg)}
   }
 
-  /* ---------- listón diagonal con el nombre ---------- */
+  /* ---------- listón diagonal con el nombre ----------
+     Vive en su propia banda: la banda recorta (overflow) y el listón
+     la cruza en diagonal saliéndose por las esquinas. */
+  .liston-zona{
+    position:relative;overflow:hidden;pointer-events:none;
+    height:clamp(4.6rem,7vw,6.5rem);
+    margin-bottom:-2px;z-index:4;
+  }
   .liston{
-    position:absolute;left:-6%;right:-6%;bottom:-1.4rem;
-    transform:rotate(-4.5deg);z-index:3;pointer-events:none;
+    position:absolute;top:50%;left:-10%;right:-10%;
     background:var(--red);color:var(--paper);
     border-block:2px solid var(--ink);
-    overflow:hidden;white-space:nowrap;padding:.55rem 0;
+    white-space:nowrap;overflow:hidden;padding:.55rem 0;
     box-shadow:0 10px 28px rgba(20,17,18,.22);
-    opacity:0;animation:entrar .9s ease 1.5s forwards;
+    transform:translateY(-50%) rotate(-3deg);
+    opacity:0;animation:entrarListon .9s ease .9s forwards;
+  }
+  /* keyframe propio: conserva la rotación (el 'entrar' genérico la borraba) */
+  @keyframes entrarListon{
+    from{opacity:0;transform:translateY(calc(-50% + 16px)) rotate(-3deg)}
+    to{opacity:1;transform:translateY(-50%) rotate(-3deg)}
   }
   .liston .track{display:inline-flex;align-items:center;gap:1.7rem;width:max-content;animation:desfile 16s linear infinite}
   .liston span{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(.85rem,1.4vw,1.1rem);letter-spacing:.24em}
@@ -463,16 +489,32 @@
     nav a{font-size:.62rem;letter-spacing:.14em}
   }
   @media (max-width:700px){
-    /* header en dos filas: logo grande + menú de chips fáciles de picar */
-    header{flex-wrap:wrap;padding:.6rem 1rem 0}
-    .brand{width:100%;gap:.7rem}
+    /* header de una fila: logo grande + hamburguesa */
+    header{padding:.5rem 1rem}
+    .brand{gap:.7rem}
     .brand img.glifo{height:34px}
     .brand img.wm{display:block;height:15px}
-    nav{width:100%;overflow-x:auto;gap:.5rem;padding:.6rem 0 .7rem;scrollbar-width:none}
-    nav::-webkit-scrollbar{display:none}
-    nav a{font-size:.72rem;letter-spacing:.12em;padding:.72rem .95rem;border:1.5px solid var(--tinta);white-space:nowrap}
+    .hamb{display:flex}
+    /* el menú baja como panel desde el header */
+    nav{
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:var(--fondo);
+      border-bottom:2px solid var(--tinta);
+      padding:.3rem 1rem 1rem;
+      box-shadow:0 20px 34px rgba(20,17,18,.16);
+      transform:translateY(-125%);
+      transition:transform .38s cubic-bezier(.4,0,.2,1);
+      visibility:hidden;
+    }
+    nav.abierto{transform:none;visibility:visible}
+    nav a{
+      font-size:1rem;letter-spacing:.18em;padding:1.05rem .2rem;
+      border-bottom:1.5px solid color-mix(in srgb, var(--tinta) 22%, transparent);
+    }
+    nav a:last-child{border-bottom:0}
     nav a::after{display:none}
-    .hero{padding-top:8.2rem}
+    .hero{padding-top:6.5rem}
     .seccion{padding-block:3.8rem}
     .etiqueta{margin-bottom:1.8rem}
     .indice{grid-template-columns:1fr 1fr;gap:.55rem}
@@ -484,7 +526,7 @@
   }
   @media (prefers-reduced-motion:reduce){
     .saturno-orbita,.marquee .track,.liston .track{animation:none;opacity:1}
-    .liston{animation:none;opacity:1}
+    .liston{animation:none;opacity:1;transform:translateY(-50%) rotate(-3deg)}
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
     .hero-title .kicker,.hero-title h1 .the,.hero-title h1 .linea,.hero-meta,
@@ -517,7 +559,10 @@
     <img class="glifo" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045474584-brand--glifo-negro.svg" alt="">
     <img class="wm" src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045481464-brand--wordmark-negro.svg" alt="omar.omega">
   </a>
-  <nav>
+  <button class="hamb" id="hamb" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="nav">
     <a href="#musica">Música</a>
     <a href="#video">Video</a>
     <a href="#fotos">Fotos</a>
@@ -551,8 +596,12 @@
         <figcaption data-c="heroPie"></figcaption>
       </figure>
     </div>
-    <div class="liston" aria-hidden="true"><div class="track" id="listonTrack"></div></div>
   </section>
+
+  <!-- ============ LISTÓN DIAGONAL ============ -->
+  <div class="liston-zona" aria-hidden="true">
+    <div class="liston"><div class="track" id="listonTrack"></div></div>
+  </div>
 
   <!-- ============ MARQUEE ============ -->
   <div class="marquee" aria-hidden="true">
@@ -719,6 +768,25 @@ const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIs
   } catch (e) { /* sin conexión: contenido local */ }
   window.__origenContenido = C === window.CONTENIDO ? 'local' : 'supabase';
   iniciar(C);
+})();
+
+/* ---- menú hamburguesa (independiente del contenido) ---- */
+(function menu(){
+  const btn = document.getElementById('hamb');
+  const nav = document.getElementById('nav');
+  if (!btn || !nav) return;
+  const abrir = (si) => {
+    nav.classList.toggle('abierto', si);
+    btn.classList.toggle('abierto', si);
+    btn.setAttribute('aria-expanded', si);
+    btn.setAttribute('aria-label', si ? 'Cerrar menú' : 'Abrir menú');
+  };
+  btn.addEventListener('click', () => abrir(!nav.classList.contains('abierto')));
+  /* al elegir una sección, se cierra */
+  nav.addEventListener('click', e => { if (e.target.closest('a')) abrir(false); });
+  /* Esc y volver a desktop también lo cierran */
+  addEventListener('keydown', e => { if (e.key === 'Escape') abrir(false); });
+  matchMedia('(min-width:701px)').addEventListener('change', e => { if (e.matches) abrir(false); });
 })();
 
 function iniciar(C){
