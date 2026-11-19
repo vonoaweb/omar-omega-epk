@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/:path*", "destination": "https://omaromega.com/:path*", "permanent": true }
+  ]
+}

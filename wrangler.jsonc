@@ -1,0 +1,10 @@
+{
+  // Sitio estático del EPK de The Omar Omega, servido por Cloudflare Workers.
+  "name": "omar-omega-epk",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./", "not_found_handling": "404-page" },
+  "routes": [
+    { "pattern": "omaromega.com", "custom_domain": true },
+    { "pattern": "www.omaromega.com", "custom_domain": true }
+  ]
+}
