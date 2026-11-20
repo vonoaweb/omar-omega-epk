@@ -1,8 +1,15 @@
 {
-  // Sitio estático del EPK de The Omar Omega, servido por Cloudflare Workers.
+  // Press kit de The Omar Omega en omaromega.com.
+  // src/worker.js rellena la portada para buscadores e IA y sirve robots/sitemap/llms.txt.
   "name": "omar-omega-epk",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
-  "assets": { "directory": "./", "not_found_handling": "404-page" },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/", "/index.html", "/index", "/robots.txt", "/sitemap.xml", "/llms.txt"]
+  },
   "routes": [
     { "pattern": "omaromega.com", "custom_domain": true },
     { "pattern": "www.omaromega.com", "custom_domain": true }

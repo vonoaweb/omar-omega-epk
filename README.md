@@ -25,7 +25,7 @@ The Omar Omega (Omar Jiménez). Demo construida el 13-jul-2026; online desde el 
 python -m http.server 8014 --directory omar-omega-epk
 ```
 
-o abrir `index.html` directo en el navegador.
+o abrir `public/index.html` directo en el navegador.
 
 ## Estructura
 
@@ -80,3 +80,11 @@ cráteres con semilla fija y halo. Clic = saltar; `prefers-reduced-motion` la om
 - Referencias que él mandó: Gesaffelstein, Madonna, Lady Gaga, PinkPantheress.
 - Secciones numeradas como "actos" (eco de su video Act 0 y su narrativa por capítulos).
 - Fade-in con IntersectionObserver, marquee CSS, lightbox con `<dialog>` nativo.
+
+## Hosting (desde 19-nov-2026)
+- Dominio **omaromega.com** en Cloudflare (Worker `omar-omega-epk`). Archivos públicos en `public/`.
+- `src/worker.js` rellena la portada en el servidor con el contenido de Supabase (para que buscadores
+  y asistentes de IA lean la biografía sin ejecutar JavaScript) y sirve `robots.txt`, `sitemap.xml` y `llms.txt`.
+- Publicar cambios de código: `npx wrangler@4.40.0 deploy` (un `git push` ya NO publica).
+- Lo que Omar edita en `/admin.html` se ve al momento en la página y en ≤2 min para los bots.
+- `vercel.json`: la dirección vieja de Vercel redirige todo a omaromega.com.
