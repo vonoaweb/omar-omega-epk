@@ -78,6 +78,7 @@ function jsonLd(C) {
         name: `${C.artista || 'The Omar Omega'} — Press Kit oficial`,
         inLanguage: 'es-MX',
         about: { '@id': `${SITIO}/#artista` },
+        creator: { '@type': 'Organization', name: 'Vonoa', url: 'https://vonoaweb.com/' },
       },
     ],
   };

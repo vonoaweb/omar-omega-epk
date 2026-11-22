@@ -455,6 +455,11 @@
   }
   .pie img{height:44px;width:auto}
   .pie p{font-size:.72rem;font-style:italic;opacity:.75}
+  .pie-textos{display:flex;flex-direction:column;gap:.45rem;text-align:right}
+  .pie .credito{font-style:normal;letter-spacing:.02em;opacity:.6}
+  .pie .credito a{text-decoration:underline;text-underline-offset:3px}
+  .pie .credito a:hover{opacity:1;color:var(--yellow)}
+  @media (max-width:700px){.pie-textos{text-align:left}}
 
   /* ---------- reveal ---------- */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
@@ -740,7 +745,10 @@
 <footer>
   <div class="pie">
     <img src="https://ajekywhnuepmqbxflala.supabase.co/storage/v1/object/public/omar-epk/1784045471875-brand--firma-blanco.svg" alt="Omar Jiménez">
-    <p data-c="piePagina"></p>
+    <div class="pie-textos">
+      <p data-c="piePagina"></p>
+      <p class="credito">Sitio web por <a href="https://vonoaweb.com/" target="_blank" rel="noopener">Vonoa · diseño de páginas web en Guadalajara</a></p>
+    </div>
   </div>
 </footer>
 
